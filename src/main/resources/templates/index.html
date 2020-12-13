@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="jp" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/style.css}">
+    <title th:text="${msg}"></title>
+</head>
+<body>
+<div class="SourceViewer">
+    <div class="l0">List&lt;Integer> integerList = Arrays.asList(1, 2, 3, 4, 5);</div>
+    <div class="l0">integerList.stream() // streamの取得</div>
+    <div class="l1"><span class="stream1">①.filter(<span class="lam1">② i -> i % 2 == 0</span> )</span> // 中間操作</div>
+    <div class="l1"><span class="stream2">③.forEach(<span class="lam2">④ i -> System.out.println(i)</span>)</span>; // 終端操作</div>
+</div>
+<div class="lamPanel-Container">
+    <div class="stream1Panel">
+        ①-StreamAPI<br>
+        引数のラムダ式の型:Predicate&lt;T><br>
+        返り値の型:Stream&lt;T><br>
+        <img th:src="@{/img/i1.png}">
+
+    </div>
+    <div class="lam1Panel">
+        ②-ラムダ式
+        <div class="type"><a href="index.html">Predicate&lt;T&gt;</a></div>
+        <div class="argType">引数の型[a:int]</div>
+        <div class="retType">返り値の型:boolean</div>
+    </div>
+    <div class="stream2Panel">
+        ③-StreamAPI
+    </div>
+    <div class="lam2Panel">
+        ④-ラムダ式
+        <div class="type"><a href="index.html">Consumer&lt;T&gt;</a></div>
+        <div class="argType">引数の型[a:int]</div>
+        <div class="retType">返り値の型:boolean</div>
+    </div>
+</div>
+
+
+</body>
+</html>
