@@ -1,0 +1,20 @@
+
+
+
+
+
+VariableDeclaratorの解析結果
+func1 's type ->ReferenceType{
+    java.util.function.Function, typeParametersMap=TypeParametersMap{
+        nameToValue={
+            java.util.function.Function.R=ReferenceType{
+                java.lang.String,
+                typeParametersMap=TypeParametersMap{nameToValue={}}
+            },
+            java.util.function.Function.T=ReferenceType{
+                java.lang.Integer,
+                typeParametersMap=TypeParametersMap{nameToValue={}}
+            }
+        }
+    }
+}
