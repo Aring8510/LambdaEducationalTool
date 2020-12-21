@@ -56,7 +56,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        // SpringApplication.run(Main.class, args);
+        SpringApplication.run(Main.class, args);
         parse();
 
 
@@ -72,7 +72,6 @@ public class Main {
         SourceRoot sourceRoot = new SourceRoot(CodeGenerationUtils.mavenModuleRoot(Main.class).resolve("src/main/resources"));
 
         TypeSolver reflectionTypeSolver = new ReflectionTypeSolver();
-        // reflectionTypeSolver.setParent(reflectionTypeSolver);
         TypeSolver javaParserTypeSolver = new JavaParserTypeSolver(new File("src/main/resources"));
 
         CombinedTypeSolver combinedTypeSolver = new CombinedTypeSolver();
@@ -81,11 +80,11 @@ public class Main {
 
         JavaSymbolSolver symbolSolver = new JavaSymbolSolver(combinedTypeSolver);
         StaticJavaParser.getConfiguration().setSymbolResolver(symbolSolver);
-        CompilationUnit c1;
+        CompilationUnit cu;
 
 
         try{
-             c1 = StaticJavaParser.parse(new File("C:\\Users\\nakam\\project\\Parser\\src\\main\\resources\\LambdaSource.java"));
+             cu = StaticJavaParser.parse(new File("C:\\Users\\nakam\\project\\Parser\\src\\main\\resources\\LambdaSource.java"));
             /*
             MethodCallExpr mce = Navigator.findNodeOfGivenClass(c1,MethodCallExpr.class);
             LambdaExpr le = Navigator.demandNodeOfGivenClass(c1, LambdaExpr.class);
@@ -96,7 +95,7 @@ public class Main {
             Log.info("methodArgType\n"+mce.resolve().getQualifiedSignature());
              */
 
-            c1.accept(new ModifierVisitor<Void>() {
+            cu.accept(new ModifierVisitor<Void>() {
                 @Override
                 public Visitable visit(LambdaExpr le, Void arg) {
                     // le.getParameters().stream().forEach( p -> System.out.println( p.getName() + "->"+p.getType().toString()));
@@ -157,62 +156,5 @@ public class Main {
             Log.info("parse err");
             e.printStackTrace();
         }
-
-
-
-
-        /*
-        // Our sample is in the root of this directory, so no package name.
-        // CompilationUnit cu = sourceRoot.parse("", "Blabla.java");
-        CompilationUnit cu = sourceRoot.parse("", "LambdaSource.java");
-        Log.info("Positivizing!");
-
-        cu.accept(new ModifierVisitor<Void>() {
-            @Override
-            public Visitable visit(LambdaExpr le, Void arg) {
-                int line = le.getBegin().get().line;
-                int column = le.getBegin().get().column;
-                Log.info("$$$$$$ LamdaExpr detected in line" + line + " column "+ column);
-                // Log.info("lamda expression type?:" + le.isObjectCreationExpr());
-
-                Log.info("toString...");
-                Log.info(le.toString());
-                List<Parameter> nodeList = le.getParameters();
-                Log.info("parameters...");
-                List<String> parameterType = new ArrayList<String>();
-                nodeList.stream().forEach(p -> Log.info("name:" + p.getNameAsString() + " type:" + (p.getType().isUnknownType() ? "Unknown Type" : p.getType().toString())));
-                return super.visit(le, arg);
-            }
-            @Override
-            public Visitable visit(MethodCallExpr mce, Void arg) {
-                int line = mce.getBegin().get().line;
-                int column = mce.getBegin().get().column;
-                Log.info("###### method call detected in line" + line + " column "+ column);
-                Log.info("name:"+mce.getNameAsString());
-                Log.info("type:"+mce.getTypeArguments().toString());
-                return super.visit(mce, arg);
-            }
-            @Override
-            public Visitable visit(VariableDeclarator vd, Void arg) {
-                int line = vd.getBegin().get().line;
-                int column = vd.getBegin().get().column;
-                Log.info("###### Variable Declaration detected in line" + line + " column "+ column);
-                Log.info("name:"+vd.getNameAsString());
-                Log.info("parameters...");
-                Log.info(vd.getType().toString());
-                Log.info("toString...");
-                Log.info(vd.toString());
-                return super.visit(vd, arg);
-            }
-        }, null);
-
-        // This saves all the files we just read to an output directory.
-        sourceRoot.saveAll(
-                // The path of the Maven module/project which contains the LogicPositivizer class.
-                CodeGenerationUtils.mavenModuleRoot(Main.class)
-                        // appended with a path to "output"
-                        .resolve(Paths.get("output")));
-         */
-
     }
 }
