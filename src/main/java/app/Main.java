@@ -59,7 +59,6 @@ public class Main {
         SpringApplication.run(Main.class, args);
         parse();
 
-
     }
     public static void parse() {
         // JavaParser has a minimal logging class that normally logs nothing.

@@ -24,11 +24,11 @@ public class MethodRecord {
         this.methodName = _methodName;
         this.myPosition = new MyPosition(_myPosition);
         // qualifiedSignature:クラス名.メソッド名(引数のクラス型)
-        List <String> temp = Arrays.asList(qualifiedSignature.split("\\."));
+        String[] temp = qualifiedSignature.split("\\.");
         StringBuilder sb = new StringBuilder();
         for (String t : temp){
-            if(t.indexOf("(") == -1){ // TODO:ちょっとあやしいぞ
-                sb.append(t+".");
+            if(!t.contains("(")){ // TODO:ちょっとあやしいぞ
+                sb.append(t).append(".");
             } else {
                 break;
             }

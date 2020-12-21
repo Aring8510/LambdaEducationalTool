@@ -1,6 +1,6 @@
 package app;
 
-public class MyPosition extends Object {
+public class MyPosition {
     int begin, end, beginLine, endLine;
 
     MyPosition(int b, int e, int bl, int el) {
