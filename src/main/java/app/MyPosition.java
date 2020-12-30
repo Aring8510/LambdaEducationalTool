@@ -21,5 +21,8 @@ public class MyPosition {
         return (mp.begin == this.begin) && (mp.end == this.end)
                 && (mp.beginLine == this.beginLine) && (mp.endLine == this.endLine);
     }
-    // public boolean contain(MyPosition mp){ return true;}
+    // public boolean contains(MyPosition mp){
+    // return true;
+    // }
+
 }

@@ -31,6 +31,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+import javassist.expr.MethodCall;
 import org.springframework.boot.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.boot.SpringApplication;
@@ -56,7 +57,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        SpringApplication.run(Main.class, args);
+        // SpringApplication.run(Main.class, args);
         parse();
 
     }
@@ -83,7 +84,7 @@ public class Main {
 
 
         try{
-             cu = StaticJavaParser.parse(new File("C:\\Users\\nakam\\project\\Parser\\src\\main\\resources\\LambdaSource.java"));
+             cu = StaticJavaParser.parse(new File("./src/main/resources/LambdaSource.java"));
             /*
             MethodCallExpr mce = Navigator.findNodeOfGivenClass(c1,MethodCallExpr.class);
             LambdaExpr le = Navigator.demandNodeOfGivenClass(c1, LambdaExpr.class);
@@ -97,8 +98,12 @@ public class Main {
             cu.accept(new ModifierVisitor<Void>() {
                 @Override
                 public Visitable visit(LambdaExpr le, Void arg) {
-                    // le.getParameters().stream().forEach( p -> System.out.println( p.getName() + "->"+p.getType().toString()));
+                    /*
+                    System.out.println(le.getParentNode().get().toString());
+
+                     */
                     return super.visit(le, arg);
+
                 }
                 @Override
                 public Visitable visit(MethodCallExpr mce, Void arg) {
@@ -106,6 +111,7 @@ public class Main {
                     ResolvedMethodDeclaration rmd = mce.resolve(); // 何故か標準出力しやがる
                     System.out.println(rmd.getQualifiedSignature() + "  finished! <<<<<<<<<<\n");
 
+                    // MethodRecordの生成
                     if (MethodRecord.whichFunctionalAPI(rmd.getQualifiedSignature()) == MethodRecord.functionalAPI.OptionalAPI ||
                             MethodRecord.whichFunctionalAPI(rmd.getQualifiedSignature()) == MethodRecord.functionalAPI.StreamAPI) {
                         // ResolvedMethodDeclarationのgetTypeParameters()が壊れている?ので古のFor文を使う。
@@ -121,16 +127,41 @@ public class Main {
                                 rmd.getQualifiedSignature(), rmdArgType, rmd.getReturnType().describe());
                         sourceRecordStorage.registerMethodRecords(methodRecord);
                     }
+                    // LambdaRecordの生成
+                    // TODO:リファクタリング頼む
+                    for(int i=0; i < mce.getArguments().size();i++){
+                        if (mce.getArguments().get(i).isLambdaExpr()){
+                            String lambdaType = rmd.getParam(i).getType().describe();
+                            List<String> argTypes = new ArrayList<>();
+                            List<String> argNames = new ArrayList<>();
+                            mce.getArgument(i).ifLambdaExpr(le-> {
+                                        le.getParameters().forEach(p->{
+                                            argNames.add(p.getNameAsString());
+                                            // argTypes.add(p.getType().toString());
+                                        });
+                                        int b = le.getBegin().orElse(new Position(-1,-1)).column;
+                                        int e = le.getEnd().orElse(new Position(-1,-1)).column;
+                                        int bl = le.getBegin().orElse(new Position(-1,-1)).line;
+                                        int el = le.getEnd().orElse(new Position(-1,-1)).line;
+                                        final MyPosition mp = new MyPosition(b,e,bl,el);
+                                        // TODO:やばい
+                                        LambdaRecord lr = new LambdaRecord(lambdaType, argNames, argTypes, "brabra", mp);
+                                        lr.describe();
+                                        sourceRecordStorage.registerLambdaRecord(lr);
+                                    }
+                            );
 
-
-
+                        }
+                    }
                     return super.visit(mce, arg);
                 }
                 @Override
                 public Visitable visit(VariableDeclarator vd, Void arg) {
-                    // System.out.println(vd.resolve().getName() + " type ->" + vd.resolve().getType());
-                    // System.out.println(vd.getNameAsString());
-                    // System.out.println(ResolvedLambdaConstraintType.bound(vd.resolve().getType()).describe());
+                    /*
+                    System.out.println(vd.resolve().getName() + " type ->" + vd.resolve().getType());
+                    System.out.println(vd.getNameAsString());
+                    System.out.println(ResolvedLambdaConstraintType.bound(vd.resolve().getType()).describe());
+                     */
                     return super.visit(vd, arg);
                 }
                 @Override

@@ -6,13 +6,15 @@ import java.util.List;
 import java.util.Map;
 
 public class SourceRecordStorage {
-    Map<MyPosition,LambdaRecord> LambdaRecords = new HashMap<>();
-    Map<MyPosition,MethodRecord> MethodRecords = new HashMap<>();
+    List<LambdaRecord> LambdaRecords = new ArrayList<>();
+    List<MethodRecord> MethodRecords = new ArrayList<>();
 
     boolean registerLambdaRecord(LambdaRecord lr){
+        LambdaRecords.add(lr);
         return true;
     }
     boolean registerMethodRecords(MethodRecord mr){
+        MethodRecords.add(mr);
         return true;
     }
 }
