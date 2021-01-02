@@ -42,26 +42,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class Main {
 
-/*
-    @Bean
-    CommandLineRunner init(StorageService storageService) {
-        return (args) -> {
-            storageService.deleteAll();
-            storageService.init();
-        };
-    }
-
- */
-
-    static SourceRecordStorage sourceRecordStorage = new SourceRecordStorage(); // parseしたソースコードの解析結果(レコード)を入れるクラス
 
     public static void main(String[] args) {
 
         SpringApplication.run(Main.class, args);
-        parse();
+        // parse();
 
     }
-    public static void parse() {
+    public static SourceRecordStorage parse(String source) {
+        SourceRecordStorage sourceRecordStorage = new SourceRecordStorage(); // parseしたソースコードの解析結果(レコード)を入れるクラス
         // JavaParser has a minimal logging class that normally logs nothing.
         // Let's ask it to write to standard out:
         Log.setAdapter(new Log.StandardOutStandardErrorAdapter());
@@ -84,7 +73,9 @@ public class Main {
 
 
         try{
-             cu = StaticJavaParser.parse(new File("./src/main/resources/LambdaSource.java"));
+            // cu = StaticJavaParser.parse(new File("./src/main/resources/LambdaSource.java"));
+            cu = StaticJavaParser.parse(source);
+
             /*
             MethodCallExpr mce = Navigator.findNodeOfGivenClass(c1,MethodCallExpr.class);
             LambdaExpr le = Navigator.demandNodeOfGivenClass(c1, LambdaExpr.class);
@@ -100,7 +91,6 @@ public class Main {
                 public Visitable visit(LambdaExpr le, Void arg) {
                     /*
                     System.out.println(le.getParentNode().get().toString());
-
                      */
                     return super.visit(le, arg);
 
@@ -186,5 +176,6 @@ public class Main {
             Log.info("parse err");
             e.printStackTrace();
         }
+        return sourceRecordStorage;
     }
 }

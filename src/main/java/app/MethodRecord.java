@@ -3,9 +3,8 @@ package app;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.ToDoubleBiFunction;
 
-public class MethodRecord {
+public class MethodRecord implements Record, Comparable<Record>{
 
     String methodName;
     MyPosition myPosition;
@@ -42,6 +41,33 @@ public class MethodRecord {
         describe();
     }
 
+    @Override
+    public boolean isLambdaRecord() {
+        return false;
+    }
+
+    @Override
+    public boolean isMethodRecord() {
+        return true;
+    }
+
+    @Override
+    public MethodRecord asMethodRecord() {
+        return this;
+    }
+
+    @Override
+    public LambdaRecord asLambdaRecord() {
+        System.out.println("this is MethodRecord");
+        return null;
+    }
+
+    @Override
+    public MyPosition getMyPosition() {
+        return myPosition;
+    }
+
+    @Override
     public void describe(){
         System.out.println("methodName -> " + methodName);
         System.out.println("myPosition -> (begin=" + myPosition.begin + ", end=" + myPosition.end + ", beginLine=" + myPosition.beginLine + ", endLine="+myPosition.endLine);
@@ -52,6 +78,13 @@ public class MethodRecord {
         System.out.println("whichFunctionalAPI -> " + f);
         System.out.println("isJavaAPI -> " + isJavaAPI(className));
     }
+
+    // :TODO
+    @Override
+    public int compareTo(Record r) {
+        return 0;
+    }
+
     // 外部からも使うよ
     public static boolean isJavaAPI(String classStr){
         List <String> beginStr = Arrays.asList(classStr.split("\\."));
@@ -66,5 +99,4 @@ public class MethodRecord {
             return functionalAPI.notFunctionalAPI;
         }
     }
-
 }

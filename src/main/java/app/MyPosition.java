@@ -21,6 +21,10 @@ public class MyPosition {
         return (mp.begin == this.begin) && (mp.end == this.end)
                 && (mp.beginLine == this.beginLine) && (mp.endLine == this.endLine);
     }
+    // TODO:
+    public int compareTo(MyPosition other){
+        return 0;
+    }
     // public boolean contains(MyPosition mp){
     // return true;
     // }
