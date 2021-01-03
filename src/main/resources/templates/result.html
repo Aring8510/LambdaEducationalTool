@@ -8,7 +8,9 @@
 <body>
 <h1>Result</h1>
 <div class="SourceViewer">
-    <code th:text="${sourceInput.source}" />
+    <pre>
+        <code th:text="${sourceInput.source}" />
+    </pre>
 </div>
 <div class="lamPanel-Container" >
     <div class="stream1Panel" th:each="pt, status : ${srs.getPTitle()}">
@@ -20,6 +22,6 @@
         <p th:text="${srs.getPUrl().get(__${status.count}__ -1)}"></p>
    </div>
 </div>
-<a href="/sourceInput">Submit another source</a>
+<a href="/sourceInput" class="submit-button">Submit another source</a>
 </body>
 </html>
