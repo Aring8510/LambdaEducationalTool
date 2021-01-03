@@ -10,10 +10,16 @@
 <div class="SourceViewer">
     <code th:text="${sourceInput.source}" />
 </div>
-<!--<div class="lamPanel-Container" th:each="p, status : ${sourceInput}">
-    <div class="stream1Panel">
-    </div>
-</div>-->
+<div class="lamPanel-Container" >
+    <div class="stream1Panel" th:each="pt, status : ${srs.getPTitle()}">
+        <p th:text="${pt}"></p>
+        <p th:text="'型:'+${srs.getPType().get(__${status.count}__ -1)}"></p>
+        <p th:text="'引数の型'+${srs.getPArgType().get(__${status.count}__ -1)}"></p>
+        <p th:text="'戻り値の型'+${srs.getPRetType().get(__${status.count}__ -1)}"></p>
+        <p><img th:src="${srs.getPImgUrl().get(__${status.count}__ -1)}"></p>
+        <p th:text="${srs.getPUrl().get(__${status.count}__ -1)}"></p>
+   </div>
+</div>
 <a href="/sourceInput">Submit another source</a>
 </body>
 </html>

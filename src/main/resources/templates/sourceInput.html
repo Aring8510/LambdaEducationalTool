@@ -7,39 +7,67 @@
 <body>
 <h1>input source</h1>
 <form action="#" th:action="@{/sourceInput}" th:object="${sourceInput}" method="post" >
-    <code><textarea th:field="*{source}" cols="999" rows="999" style="height: 500px;width: 90%;"></textarea> </code>
+    <textarea th:field="*{source}" cols="999" rows="999" style="height: 500px;width: 90%;" required>
+import java.util.function.*;
+import java.util.*;
+
+public class LambdaSource {
+void lambdaMethod1(Function&lt;Integer, String&gt; f) {
+}
+void lambdaMethod2() {
+Function&lt;Integer, String&gt; func1 = i -&gt; &quot;1&quot;;
+Function&lt;String, String&gt; func2 = (String s) -&gt; s;
+int i = 1;
+String a = &quot;a&quot;;
+lambdaMethod1(func1);
+}
+
+void test() {
+String str = &quot;a.b.c.d&quot;;
+List&lt;String&gt; l = Arrays.asList(str.split(&quot;.&quot;));
+l.stream().forEach(s-&gt;System.out.println(s));
+}
+void test(Function&lt;Integer, String&gt; lamda) {
+
+}
+public static void main(String[] args){
+LambdaSource l = new LambdaSource();
+l.lambdaMethod1(i-&gt;String.valueOf(i));
+}
+}
+    </textarea>
     <p><input type="submit" value="submit"></p>
 </form>
 <p>
-
-<br>import java.util.function.*;
-<br>import java.util.*;
-<br>
-<br>public class LambdaSource {
-<br>void lambdaMethod1(Function&lt;Integer, String&gt; f) {
-<br>}
-<br>void lambdaMethod2() {
-<br>Function&lt;Integer, String&gt; func1 = i -&gt; &quot;1&quot;;
-<br>Function&lt;String, String&gt; func2 = (String s) -&gt; s;
-<br>int i = 1;
-<br>String a = &quot;a&quot;;
-<br>lambdaMethod1(func1);
-<br>}
-<br>
-<br>void test() {
-<br>String str = &quot;a.b.c.d&quot;;
-<br>List&lt;String&gt; l = Arrays.asList(str.split(&quot;.&quot;));
-<br>l.stream().forEach(s-&gt;System.out.println(s));
-<br>}
-<br>void test(Function&lt;Integer, String&gt; lamda) {
-<br>
-<br>}
-<br>public static void main(String[] args){
-<br>LambdaSource l = new LambdaSource();
-<br>l.lambdaMethod1(i-&gt;String.valueOf(i));
-<br>}
-<br>}
+    <br>import java.util.function.*;
+    <br>import java.util.*;
+    <br>
+    <br>public class LambdaSource {
+    <br>void lambdaMethod1(Function&lt;Integer, String&gt; f) {
+    <br>}
+    <br>void lambdaMethod2() {
+    <br>Function&lt;Integer, String&gt; func1 = i -&gt; &quot;1&quot;;
+    <br>Function&lt;String, String&gt; func2 = (String s) -&gt; s;
+    <br>int i = 1;
+    <br>String a = &quot;a&quot;;
+    <br>lambdaMethod1(func1);
+    <br>}
+    <br>
+    <br>void test() {
+    <br>String str = &quot;a.b.c.d&quot;;
+    <br>List&lt;String&gt; l = Arrays.asList(str.split(&quot;.&quot;));
+    <br>l.stream().forEach(s-&gt;System.out.println(s));
+    <br>}
+    <br>void test(Function&lt;Integer, String&gt; lamda) {
+    <br>
+    <br>}
+    <br>public static void main(String[] args){
+    <br>LambdaSource l = new LambdaSource();
+    <br>l.lambdaMethod1(i-&gt;String.valueOf(i));
+    <br>}
+    <br>}
 </p>
+
 
 </body>
 </html>

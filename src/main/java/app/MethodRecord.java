@@ -11,6 +11,7 @@ public class MethodRecord implements Record, Comparable<Record>{
     String className;
     List<String> argumentTypeName;
     String returnTypeName;
+    String apiName;
 
     public enum functionalAPI{
         notFunctionalAPI,
@@ -23,6 +24,15 @@ public class MethodRecord implements Record, Comparable<Record>{
         this.methodName = _methodName;
         this.myPosition = new MyPosition(_myPosition);
         // qualifiedSignature:クラス名.メソッド名(引数のクラス型)
+        switch (MethodRecord.whichFunctionalAPI(qualifiedSignature)){
+            case StreamAPI: this.apiName = "Stream";
+            break;
+            case OptionalAPI: this.apiName = "Optional";
+            break;
+            case notFunctionalAPI: this.apiName = "notFunctionalAPI";
+            break;
+            default: this.apiName = "err in method record";
+        }
         String[] temp = qualifiedSignature.split("\\.");
         StringBuilder sb = new StringBuilder();
         for (String t : temp){
@@ -86,10 +96,12 @@ public class MethodRecord implements Record, Comparable<Record>{
     }
 
     // 外部からも使うよ
+    // 入力がqualifiedSignatureを期待しているのでだいぶクソ実装だが...
     public static boolean isJavaAPI(String classStr){
         List <String> beginStr = Arrays.asList(classStr.split("\\."));
         return (!beginStr.isEmpty() && beginStr.get(0).equals("java")); // TODO:ほんとか?
     }
+    // 入力がqualifiedSignatureを期待しているのでだいぶクソ実装だが...
     public static functionalAPI whichFunctionalAPI(String classStr){
         if(classStr.indexOf("java.util.stream") == 0){
             return functionalAPI.StreamAPI;

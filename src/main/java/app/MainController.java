@@ -21,10 +21,14 @@ public class MainController {
         return "sourceInput";
     }
     @PostMapping(value = "/sourceInput")
-    public String sourceInputSubmit (@ModelAttribute SourceInput si,  Model model) {
-        SourceRecordStorage sourceRecordStorage = Main.parse(si.getSource());
+    public String sourceInputSubmit (@ModelAttribute SourceInput si, @ModelAttribute SourceRecordStorage sourceRecordStorage, Model model) {
+        sourceRecordStorage = Main.parse(si.getSource());
+        sourceRecordStorage.parseMethodRecord();
+        sourceRecordStorage.parseLambdaRecord();
+        System.out.println(sourceRecordStorage.getPArgType());
 
         model.addAttribute("sourceInput", si);
+        model.addAttribute("srs", sourceRecordStorage);
         return "result";
     }
 }

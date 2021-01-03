@@ -115,7 +115,7 @@ public class Main {
                         MyPosition myPosition = new MyPosition(beginPosition.column, endPosition.column, beginPosition.line, endPosition.line);
                         MethodRecord methodRecord = new MethodRecord(rmd.getName(), myPosition,
                                 rmd.getQualifiedSignature(), rmdArgType, rmd.getReturnType().describe());
-                        sourceRecordStorage.registerMethodRecords(methodRecord);
+                        sourceRecordStorage.registerMethodRecord(methodRecord);
                     }
                     // LambdaRecordの生成
                     // TODO:リファクタリング頼む
