@@ -12,6 +12,7 @@ public class MethodRecord implements Record, Comparable<Record>{
     List<String> argumentTypeName;
     String returnTypeName;
     String apiName;
+    int counter;
 
     public enum functionalAPI{
         notFunctionalAPI,
@@ -110,5 +111,10 @@ public class MethodRecord implements Record, Comparable<Record>{
         } else {
             return functionalAPI.notFunctionalAPI;
         }
+    }
+
+    @Override
+    public int getCounter() {
+        return counter;
     }
 }

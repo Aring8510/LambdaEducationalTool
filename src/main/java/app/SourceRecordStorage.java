@@ -1,14 +1,16 @@
 package app;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.lang.reflect.Array;
+import java.util.*;
 
 public class SourceRecordStorage {
     // TODO:こういう変数は次からはOptionalにしろよな^^
     List<LambdaRecord> lambdaRecords = new ArrayList<>();
     List<MethodRecord> methodRecords = new ArrayList<>();
     // List<Record> mergedRecords = new ArrayList<>();
+    Map<MyPosition, List<Record>> positionMap = new HashMap<>();
+
+    int counter = 0;
 
     private List<String> pTitle = new ArrayList<>();
     private List<String> pType = new ArrayList<>();
@@ -19,12 +21,20 @@ public class SourceRecordStorage {
 
     boolean registerLambdaRecord(LambdaRecord lr){
         lambdaRecords.add(lr);
+        lr.counter = counter++;
+        // TODO:refactor me
+        positionMap.putIfAbsent(lr.myPosition, new ArrayList<>());
+        positionMap.get(lr.myPosition).add(lr);
         // TODO:registerできなかったらfalse
         return true;
     }
 
     boolean registerMethodRecord(MethodRecord mr){
         methodRecords.add(mr);
+        mr.counter = counter++;
+        // TODO:refactor me
+        positionMap.putIfAbsent(mr.myPosition, new ArrayList<>());
+        positionMap.get(mr.myPosition).add(mr);
         // TODO:registerできなかったらfalse
         return true;
     }
@@ -77,6 +87,13 @@ public class SourceRecordStorage {
         methodRecords.forEach( mr -> System.out.println("methodRecord:"+mr.methodName));
         System.out.println("lambdaRecords:");
         lambdaRecords.forEach( lr -> System.out.println("methodRecord:"+lr.type));
+    }
+    void describePositionMap(){
+        System.out.println("PositionMap:");
+        positionMap.forEach((mp,records)->{
+            mp.describe();
+            records.forEach(r->r.describe());
+        });
     }
 
     // void parseMergedRecords(){}

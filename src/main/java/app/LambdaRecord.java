@@ -9,6 +9,7 @@ public class LambdaRecord implements Record, Comparable<Record> {
     List<String> argType;
     String returnType;
     MyPosition myPosition;
+    int counter;
 
     LambdaRecord(String _type, List<String> _argName, List<String> _argType, String _returnType, MyPosition _myPosition){
         this.type = _type;
@@ -56,6 +57,11 @@ public class LambdaRecord implements Record, Comparable<Record> {
     @Override
     public int compareTo(Record r) {
         return 0;
+    }
+
+    @Override
+    public int getCounter() {
+        return counter;
     }
 }
 

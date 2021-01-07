@@ -25,7 +25,9 @@ public class MainController {
         sourceRecordStorage = Main.parse(si.getSource());
         sourceRecordStorage.parseMethodRecord();
         sourceRecordStorage.parseLambdaRecord();
-        System.out.println(sourceRecordStorage.getPArgType());
+
+        si.createHighlightedSource(sourceRecordStorage);
+        // si.describeHighlightedCode();
 
         model.addAttribute("sourceInput", si);
         model.addAttribute("srs", sourceRecordStorage);

@@ -6,5 +6,6 @@ public interface Record {
     boolean isMethodRecord();
     MethodRecord asMethodRecord();
     MyPosition getMyPosition();
+    int getCounter();
     void describe();
 }
