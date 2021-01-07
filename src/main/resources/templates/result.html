@@ -8,9 +8,7 @@
 <body>
 <h1>Result</h1>
 <div class="SourceViewer">
-    <pre>
-        <code th:text="${sourceInput.source}" />
-    </pre>
+    <code th:text="${sourceInput.source}" />
 </div>
 <div class="lamPanel-Container" >
     <div class="stream1Panel" th:each="pt, status : ${srs.getPTitle()}">
