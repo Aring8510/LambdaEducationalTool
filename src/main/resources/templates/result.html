@@ -1,15 +1,13 @@
 <!DOCTYPE HTML>
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
-    <title>Getting Started: Handling Form Submission</title>
+    <title>result</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" th:href="@{/style.css}">
 </head>
 <body>
 <h1>Result</h1>
-<div class="SourceViewer">
-    <code th:text="${sourceInput.source}" />
-</div>
+<pre><code id="SourceViewer"></code></pre>
 <div class="lamPanel-Container" >
     <div class="stream1Panel" th:each="pt, status : ${srs.getPTitle()}">
         <p th:text="${pt}"></p>
@@ -21,5 +19,13 @@
    </div>
 </div>
 <a href="/sourceInput" class="submit-button">Submit another source</a>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    window.onload = function (){
+        let source = /*[[${sourceInput.highlightedSource}]]*/ 'err'
+        document.getElementById('SourceViewer').innerHTML = source
+    }
+    /*]]>*/
+</script>
 </body>
 </html>

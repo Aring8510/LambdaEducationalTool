@@ -26,11 +26,13 @@ public class MainController {
         sourceRecordStorage.parseMethodRecord();
         sourceRecordStorage.parseLambdaRecord();
 
-        si.createHighlightedSource(sourceRecordStorage);
-        // si.describeHighlightedCode();
+        System.out.println(si.createHighlightedSource(sourceRecordStorage));
+        // si.createHighlightedSource(sourceRecordStorage
 
         model.addAttribute("sourceInput", si);
         model.addAttribute("srs", sourceRecordStorage);
+
+        System.out.println("finished");
         return "result";
     }
 }

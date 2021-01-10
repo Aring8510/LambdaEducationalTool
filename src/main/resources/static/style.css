@@ -8,7 +8,12 @@ body {
 img {
     width : 480px;
 }
-.SourceViewer {
+span {
+    border: 0px;
+    margin:0px;
+    padding:0px;
+}
+#SourceViewer {
     background-color: lightgrey;
     color: black;
     position: absolute;
@@ -18,7 +23,6 @@ img {
     border: 4px solid gray;
     float : left;
     font-size: 18px;
-    white-space: pre-wrap;
 }
 .lam1 {
     display: inline-block;
