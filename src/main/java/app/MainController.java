@@ -26,8 +26,8 @@ public class MainController {
         sourceRecordStorage.parseMethodRecord();
         sourceRecordStorage.parseLambdaRecord();
 
-        System.out.println(si.createHighlightedSource(sourceRecordStorage));
-        // si.createHighlightedSource(sourceRecordStorage
+        si.createHighlightedSource(sourceRecordStorage);
+        System.out.println(sourceRecordStorage.getColorCounter());
 
         model.addAttribute("sourceInput", si);
         model.addAttribute("srs", sourceRecordStorage);

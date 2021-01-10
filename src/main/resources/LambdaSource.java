@@ -15,14 +15,16 @@ public class LambdaSource {
     void test() {
         String str = "a.b.c.d";
         List<String> l = Arrays.asList(str.split("."));
-        l.stream().forEach(s->System.out.println(s));
+        l.stream().filter(s->s.chars().allMatch(Character::isDigit)).forEach(s->System.out.println(s));
     }
     void test(Function<Integer, String> lamda) {
 
     }
     public static void main(String[] args){
         LambdaSource l = new LambdaSource();
-        l.lambdaMethod1(i->String.valueOf(i));
+        l.lambdaMethod1(i->{
+            return String.valueOf(i);
+        });
     }
 }
 

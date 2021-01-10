@@ -103,13 +103,9 @@ class CodeChar{
         srs.positionMap.forEach( (mp,records) ->{
             if(mp.isStart(line, column)){
                 records.forEach(r->{
-                    if(r.isLambdaRecord()){
+                    if(r.isLambdaRecord() || r.isMethodRecord()){
                         hasAdditionalClass = true;
-                        className += "l_" + r.getCounter() + " ";
-                    }
-                    if(r.isMethodRecord()){
-                        hasAdditionalClass = true;
-                        className += "m_" + r.getCounter() + " ";
+                        className += "t_" + r.getCounter() + " ";
                     }
                 });
             }else if(mp.isEnd(line, column-1)){

@@ -18,6 +18,7 @@ public class SourceRecordStorage {
     private List<String> pArgType = new ArrayList<>();
     private List<String> pRetType = new ArrayList<>();
     private List<String> pImgUrl = new ArrayList<>();
+    private List<Integer> colorCounter = new ArrayList<>();
 
     boolean registerLambdaRecord(LambdaRecord lr){
         lambdaRecords.add(lr);
@@ -59,6 +60,12 @@ public class SourceRecordStorage {
             }
             pRetType.add(lr.returnType);
             pImgUrl.add("./img/i1.png");
+            if (positionMap.containsKey(lr.myPosition) && positionMap.get(lr.myPosition).get(0) != null){
+                // 最初のレコードのカウンターがカラーカウンターのなる
+                colorCounter.add(positionMap.get(lr.myPosition).get(0).getCounter());
+            } else {
+                colorCounter.add(lr.getCounter());
+            }
         });
     }
 
@@ -79,7 +86,16 @@ public class SourceRecordStorage {
             }
             pRetType.add(mr.returnTypeName);
             pImgUrl.add("./img/i1.png");
+            if (positionMap.containsKey(mr.myPosition) && positionMap.get(mr.myPosition).get(0) != null){
+                // 最初のレコードのカウンターがカラーカウンターのなる
+                colorCounter.add(positionMap.get(mr.myPosition).get(0).getCounter());
+            } else {
+                colorCounter.add(mr.getCounter());
+            }
         });
+    }
+    void reCalculateColorCounter(){ // メソッド・ラムダの色分け用のカウンターを計算する
+
     }
 
     void describe(){
@@ -88,14 +104,6 @@ public class SourceRecordStorage {
         System.out.println("lambdaRecords:");
         lambdaRecords.forEach( lr -> System.out.println("methodRecord:"+lr.type));
     }
-    void describePositionMap(){
-        System.out.println("PositionMap:");
-        positionMap.forEach((mp,records)->{
-            mp.describe();
-            records.forEach(r->r.describe());
-        });
-    }
-
     // void parseMergedRecords(){}
 
 
@@ -111,4 +119,6 @@ public class SourceRecordStorage {
     public void setPRetType(List p){ this.pRetType = new ArrayList(p);}
     public List getPImgUrl(){ return pImgUrl; }
     public void setPImgType(List p){ this.pImgUrl = new ArrayList(p);}
+    public List<Integer> getColorCounter() { return colorCounter; }
+    public void setColorCounter(List<Integer> colorCounter) { this.colorCounter = colorCounter; }
 }
