@@ -12,8 +12,8 @@
     <div class="stream1Panel" th:each="pt, status : ${srs.getColorCounter()}" th:classappend="'t_'+__${pt}__">
         <p th:text="${srs.getPTitle().get(__${status.count}__ -1)}"></p>
         <p th:text="'型:'+${srs.getPType().get(__${status.count}__ -1)}"></p>
-        <p th:text="'引数の型'+${srs.getPArgType().get(__${status.count}__ -1)}"></p>
-        <p th:text="'戻り値の型'+${srs.getPRetType().get(__${status.count}__ -1)}"></p>
+        <p th:text="'引数の型:'+${srs.getPArgType().get(__${status.count}__ -1)}"></p>
+        <p th:text="'戻り値の型:'+${srs.getPRetType().get(__${status.count}__ -1)}"></p>
         <p><img th:src="${srs.getPImgUrl().get(__${status.count}__ -1)}"></p>
         <p th:text="${srs.getPUrl().get(__${status.count}__ -1)}"></p>
    </div>
