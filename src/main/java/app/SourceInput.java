@@ -104,16 +104,19 @@ class CodeChar{
             if(mp.isStart(line, column)){
                 records.forEach(r->{
                     if(r.isLambdaRecord() || r.isMethodRecord()){
-                        hasAdditionalClass = true;
-                        className += "t_" + r.getCounter() + " ";
+                        if(hasAdditionalClass){
+                            // 一番最近追加したカラーカウンターを代わりに追加する
+                            srs.getColorCounter().add(srs.getColorCounter().get(srs.getColorCounter().size()-1));
+                        } else {
+                            hasAdditionalClass = true;
+                            className += "t_" + r.getCounter() + " ";
+                            srs.getColorCounter().add(r.getCounter());
+                        }
                     }
                 });
             }else if(mp.isEnd(line, column-1)){
                 records.forEach(r->{
-                    if(r.isLambdaRecord()){
-                        hasCloseTag = true;
-                    }
-                    if(r.isMethodRecord()){
+                    if(r.isLambdaRecord() || r.isMethodRecord()){
                         hasCloseTag = true;
                     }
                 });

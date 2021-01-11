@@ -60,12 +60,6 @@ public class SourceRecordStorage {
             }
             pRetType.add(lr.returnType);
             pImgUrl.add("./img/i1.png");
-            if (positionMap.containsKey(lr.myPosition) && positionMap.get(lr.myPosition).get(0) != null){
-                // 最初のレコードのカウンターがカラーカウンターのなる
-                colorCounter.add(positionMap.get(lr.myPosition).get(0).getCounter());
-            } else {
-                colorCounter.add(lr.getCounter());
-            }
         });
     }
 
@@ -86,12 +80,6 @@ public class SourceRecordStorage {
             }
             pRetType.add(mr.returnTypeName);
             pImgUrl.add("./img/i1.png");
-            if (positionMap.containsKey(mr.myPosition) && positionMap.get(mr.myPosition).get(0) != null){
-                // 最初のレコードのカウンターがカラーカウンターのなる
-                colorCounter.add(positionMap.get(mr.myPosition).get(0).getCounter());
-            } else {
-                colorCounter.add(mr.getCounter());
-            }
         });
     }
     void reCalculateColorCounter(){ // メソッド・ラムダの色分け用のカウンターを計算する

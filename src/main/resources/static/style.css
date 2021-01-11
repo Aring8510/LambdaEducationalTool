@@ -1,25 +1,3 @@
-/* from https://www.materialui.co/colors 300s*/
-:root {
-    --c0 : e57373;
-    --c1 : F06292;
-    --c2 : BA68C8;
-    --c3 : 9575CD;
-    --c4 : 7986CB;
-    --c5 : 64B5F6;
-    --c6 : 4FC3F7;
-    --c7 : 4DD0E1;
-    --c8 : 4DB6AC;
-    --c9 : 81C784;
-    -c10 : AED581;
-    -c11 : DCE775;
-    -c12 : FFF176;
-    -c13 : FFD54F;
-    -c14 : FFB74D;
-    -c15 : FF8A65;
-    -c16 : A1887F;
-    -c17 : E0E0E0;
-    -c18 : 90A4AE;
-}
 html {
     height : 100%;
 }
@@ -35,7 +13,7 @@ span {
     margin:0px;
     padding:0px;
 }
-#SourceViewer {
+#SourceViewer-Container{
     background-color: lightgrey;
     color: black;
     position: absolute;
@@ -45,6 +23,7 @@ span {
     border: 4px solid gray;
     float : left;
     font-size: 18px;
+    white-space: pre-wrap;
 }
 .lam1 {
     display: inline-block;
