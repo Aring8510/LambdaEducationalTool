@@ -5,6 +5,9 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class SourceInput{
@@ -148,5 +151,9 @@ class CodeChar{
 
     public void setHasAdditionalClass(boolean hasAdditionalClass) {
         this.hasAdditionalClass = hasAdditionalClass;
+    }
+    void test(){
+        List<Integer> list = Arrays.asList(1,2,3,4);
+        list.forEach(i->System.out.print(i*2));
     }
 }
