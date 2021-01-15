@@ -1,63 +1,74 @@
 html {
-    height : 100%;
+    height: 100%;
 }
+
 body {
     background-color: paleturquoise;
-    height : 100%;
+    height: 100%;
 }
+
 img {
-    width : 480px;
+    width: 480px;
 }
+
 span {
     border: 0px;
-    margin:0px;
-    padding:0px;
+    margin: 0px;
+    padding: 0px;
 }
-#SourceViewer-Container{
+
+#SourceViewer-Container {
     background-color: lightgrey;
     color: black;
     position: absolute;
-    height : auto;
-    left : 5px;
-    width : 48%;
+    height: auto;
+    left: 5px;
+    width: 48%;
     border: 4px solid gray;
-    float : left;
+    float: left;
     font-size: 18px;
     white-space: pre-wrap;
 }
+
 .lam1 {
     display: inline-block;
     background-color: pink;
     color: black;
 }
+
 .lam2 {
     display: inline-block;
     background-color: cornflowerblue;
     color: black;
     height: 50%;
 }
+
 .lamPanel-Container {
     position: absolute;
-    left:50%;
+    left: 50%;
 }
+
 .stream1 {
     background-color: lightsalmon;
     display: inline;
     padding-top: 4px;
     padding-bottom: 4px;
 }
+
 .lam1Panel {
-    margin :6px;
+    margin: 6px;
     border: 4px solid gray;
     background-color: pink;
-    left : 50%;
+    left: 50%;
 }
+
 .stream1Panel {
-    margin :6px;
+    margin: 6px;
     border: 4px solid gray;
     background-color: lightsalmon;
-    left : 50%;
+    left: 50%;
 }
+
 .submit-button {
     position: absolute;
     top: 0px;

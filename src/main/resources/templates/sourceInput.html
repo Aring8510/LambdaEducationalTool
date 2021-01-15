@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" th:href="@{/style.css}">
 </head>
 <body>
 <h1>input source</h1>
-<form action="#" th:action="@{/sourceInput}" th:object="${sourceInput}" method="post" >
+<form action="#" th:action="@{/sourceInput}" th:object="${sourceInput}" method="post">
     <textarea th:field="*{source}" cols="999" rows="999" style="height: 500px;width: 90%;" required>
 import java.util.function.*;
 import java.util.*;

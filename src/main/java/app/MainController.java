@@ -4,9 +4,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
-import java.util.List;
-
 @Controller
 public class MainController {
 
@@ -15,13 +12,15 @@ public class MainController {
         model.addAttribute("msg", "Hello World!!");
         return "index";
     }
+
     @GetMapping(value = "/sourceInput")
-    public String sourceInputForm (Model model) {
+    public String sourceInputForm(Model model) {
         model.addAttribute("sourceInput", new SourceInput());
         return "sourceInput";
     }
+
     @PostMapping(value = "/sourceInput")
-    public String sourceInputSubmit (@ModelAttribute SourceInput si, @ModelAttribute SourceRecordStorage sourceRecordStorage, Model model) {
+    public String sourceInputSubmit(@ModelAttribute SourceInput si, @ModelAttribute SourceRecordStorage sourceRecordStorage, Model model) {
         sourceRecordStorage = Main.parse(si.getSource());
         sourceRecordStorage.parseMethodRecord();
         sourceRecordStorage.parseLambdaRecord();

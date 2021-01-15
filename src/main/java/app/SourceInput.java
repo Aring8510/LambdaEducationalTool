@@ -5,28 +5,32 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public class SourceInput{
+public class SourceInput {
 
     private String source;
     private String highlightedSource;
     // ハイライトされたコード行のリスト
     private List<CodeLine> codeLines = new ArrayList<>();
 
-    public String getSource() { return source; }
+    public String getSource() {
+        return source;
+    }
+
     public void setSource(String source) {
         this.source = source;
     }
-    public String getHighlightedSource() { return highlightedSource; }
+
+    public String getHighlightedSource() {
+        return highlightedSource;
+    }
+
     public void setHighlightedSource(String highlightedSource) {
         this.highlightedSource = highlightedSource;
     }
 
-    public String createHighlightedSource(SourceRecordStorage srs){
+    public String createHighlightedSource(SourceRecordStorage srs) {
         List<String> sources = new ArrayList<>();
         BufferedReader br = new BufferedReader(new StringReader(source));
         br.lines().forEach(sources::add);
@@ -36,12 +40,12 @@ public class SourceInput{
             codeLines.add(new CodeLine(s, i++, srs));
         }
         StringBuilder sb = new StringBuilder();
-        codeLines.forEach(cl->{
-            cl.codeChars.forEach(cc->{
-                if (cc.hasCloseTag){
+        codeLines.forEach(cl -> {
+            cl.codeChars.forEach(cc -> {
+                if (cc.hasCloseTag) {
                     sb.append("</span>");
                 }
-                if (cc.hasAdditionalClass){
+                if (cc.hasAdditionalClass) {
                     sb.append("<span class='").append(cc.className).append("'>");
                 }
                 sb.append(escapeHTML(cc.ch));
@@ -51,8 +55,8 @@ public class SourceInput{
         return this.highlightedSource = new String(sb);
     }
 
-    String escapeHTML(char ch){
-        switch (ch){
+    String escapeHTML(char ch) {
+        switch (ch) {
             case '&':
                 return "&amp;";
             case '<':
@@ -71,15 +75,17 @@ public class SourceInput{
     }
 }
 
-class CodeLine{
+class CodeLine {
     public List<CodeChar> codeChars = new ArrayList<>();
-    CodeLine(String line, final int lineNum, SourceRecordStorage srs){
-        List<Character> chs = line.chars().mapToObj(c -> (char)c).collect(Collectors.toList());
+
+    CodeLine(String line, final int lineNum, SourceRecordStorage srs) {
+        List<Character> chs = line.chars().mapToObj(c -> (char) c).collect(Collectors.toList());
         int c = 1;
-        for(char ch : chs){
+        for (char ch : chs) {
             codeChars.add(new CodeChar(ch, lineNum, c++, srs));
         }
     }
+
     public List<CodeChar> getCodeChars() {
         return codeChars;
     }
@@ -93,23 +99,26 @@ class CodeLine{
 // 重複した場合、後のRecordで上書かれる
 // それぞれのタグがまたいだら、当然ぶっ壊れる
 
-class CodeChar{
+class CodeChar {
     public char ch;
     boolean hasAdditionalClass = false;
     boolean hasCloseTag = false;
     String className = "ch ";
+
     // TODO:refactor me
     //  ネストやば
-    CodeChar(Character c, final int line, final int column, SourceRecordStorage srs){
+    CodeChar(Character c, final int line, final int column, SourceRecordStorage srs) {
         ch = c;
-        if(srs.positionMap.isEmpty()) { return; }
-        srs.positionMap.forEach( (mp,records) ->{
-            if(mp.isStart(line, column)){
-                records.forEach(r->{
-                    if(r.isLambdaRecord() || r.isMethodRecord()){
-                        if(hasAdditionalClass){
+        if (srs.positionMap.isEmpty()) {
+            return;
+        }
+        srs.positionMap.forEach((mp, records) -> {
+            if (mp.isStart(line, column)) {
+                records.forEach(r -> {
+                    if (r.isLambdaRecord() || r.isMethodRecord()) {
+                        if (hasAdditionalClass) {
                             // 一番最近追加したカラーカウンターを代わりに追加する
-                            srs.getColorCounter().add(srs.getColorCounter().get(srs.getColorCounter().size()-1));
+                            srs.getColorCounter().add(srs.getColorCounter().get(srs.getColorCounter().size() - 1));
                         } else {
                             hasAdditionalClass = true;
                             className += "t_" + r.getCounter() + " ";
@@ -117,18 +126,19 @@ class CodeChar{
                         }
                     }
                 });
-            }else if(mp.isEnd(line, column-1)){
-                records.forEach(r->{
-                    if(r.isLambdaRecord() || r.isMethodRecord()){
+            } else if (mp.isEnd(line, column - 1)) {
+                records.forEach(r -> {
+                    if (r.isLambdaRecord() || r.isMethodRecord()) {
                         hasCloseTag = true;
                     }
                 });
             }
         });
-        if(hasAdditionalClass){
+        if (hasAdditionalClass) {
             className += "add";
         }
     }
+
     public char getCh() {
         return ch;
     }
@@ -152,8 +162,9 @@ class CodeChar{
     public void setHasAdditionalClass(boolean hasAdditionalClass) {
         this.hasAdditionalClass = hasAdditionalClass;
     }
-    void test(){
-        List<Integer> list = Arrays.asList(1,2,3,4);
-        list.forEach(i->System.out.print(i*2));
+
+    void test() {
+        List<Integer> list = Arrays.asList(1, 2, 3, 4);
+        list.forEach(i -> System.out.print(i * 2));
     }
 }

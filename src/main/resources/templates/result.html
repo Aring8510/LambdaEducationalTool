@@ -2,13 +2,13 @@
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
     <title>result</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" th:href="@{/style.css}">
 </head>
 <body>
 <h1>Result</h1>
 <pre id="SourceViewer-Container"><code id="SourceViewer"></code></pre>
-<div class="lamPanel-Container" >
+<div class="lamPanel-Container">
     <div class="stream1Panel" th:each="pt, status : ${srs.getColorCounter()}" th:classappend="'t_'+__${pt}__">
         <p th:text="${srs.getPTitle().get(__${status.count}__ -1)}"></p>
         <p th:text="'型:'+${srs.getPType().get(__${status.count}__ -1)}"></p>
@@ -16,23 +16,23 @@
         <p th:text="'戻り値の型:'+${srs.getPRetType().get(__${status.count}__ -1)}"></p>
         <p><img th:src="${srs.getPImgUrl().get(__${status.count}__ -1)}"></p>
         <p th:text="${srs.getPUrl().get(__${status.count}__ -1)}"></p>
-   </div>
+    </div>
 </div>
 <a href="/sourceInput" class="submit-button">Submit another source</a>
 <script th:inline="javascript">
     /*<![CDATA[*/
-    window.onload = function (){
+    window.onload = function () {
         let source = /*[[${sourceInput.highlightedSource}]]*/ 'err'
         document.getElementById('SourceViewer').innerHTML = source
         // from https://www.materialui.co/colors 300s https://ironodata.info/colorscheme/
 
         const colors =
-            ['#FFBBBB', '#FFFFBB', '#FFBBDD', '#AADDDD',  '#99DDFF', '#AADDAA', '#e57373' ,'#F06292' ,'#BA68C8' ,
-                '#9575CD' ,'#7986CB' ,'#64B5F6' ,'#4FC3F7' ,'#4DD0E1' ,'#4DB6AC' , '#81C784' ,'#AED581' ,'#DCE775' ,
-                '#FFF176' ,'#FFD54F' ,'#FFB74D' ,'#FF8A65' ,'#A1887F' , '#E0E0E0' , '#90A4AE']
-        for(let i in colors){
+            ['#FFBBBB', '#FFFFBB', '#FFBBDD', '#AADDDD', '#99DDFF', '#AADDAA', '#e57373', '#F06292', '#BA68C8',
+                '#9575CD', '#7986CB', '#64B5F6', '#4FC3F7', '#4DD0E1', '#4DB6AC', '#81C784', '#AED581', '#DCE775',
+                '#FFF176', '#FFD54F', '#FFB74D', '#FF8A65', '#A1887F', '#E0E0E0', '#90A4AE']
+        for (let i in colors) {
             let target = document.getElementsByClassName("t_" + i);
-            for(let t of target){
+            for (let t of target) {
                 t.style.backgroundColor = colors[i];
             }
         }

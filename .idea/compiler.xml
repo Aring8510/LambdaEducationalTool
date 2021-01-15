@@ -11,9 +11,9 @@
         <module name="javaparser-core-testing" />
         <module name="javaparser-core-testing-bdd" />
         <module name="javaparser-core" />
-        <module name="javaparser-symbol-solver-testing" />
         <module name="javaparser-core-generators" />
         <module name="javaparser-symbol-solver-core" />
+        <module name="javaparser-symbol-solver-testing" />
         <module name="javaparser-core-metamodel-generator" />
       </profile>
     </annotationProcessing>

@@ -1,7 +1,9 @@
 package app;
 
-import java.lang.reflect.Array;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class SourceRecordStorage {
     // TODO:こういう変数は次からはOptionalにしろよな^^
@@ -20,7 +22,7 @@ public class SourceRecordStorage {
     private List<String> pImgUrl = new ArrayList<>();
     private List<Integer> colorCounter = new ArrayList<>();
 
-    boolean registerLambdaRecord(LambdaRecord lr){
+    boolean registerLambdaRecord(LambdaRecord lr) {
         lambdaRecords.add(lr);
         lr.counter = counter++;
         // TODO:refactor me
@@ -30,7 +32,7 @@ public class SourceRecordStorage {
         return true;
     }
 
-    boolean registerMethodRecord(MethodRecord mr){
+    boolean registerMethodRecord(MethodRecord mr) {
         methodRecords.add(mr);
         mr.counter = counter++;
         // TODO:refactor me
@@ -43,17 +45,19 @@ public class SourceRecordStorage {
     // void sortRecordsByMyPosition(){
     // }
 
-    void parseLambdaRecord(){
+    void parseLambdaRecord() {
         // TODO:aho no blocker
-        if( lambdaRecords == null ){ return;}
-        lambdaRecords.forEach(lr-> {
+        if (lambdaRecords == null) {
+            return;
+        }
+        lambdaRecords.forEach(lr -> {
             // TODO:数字を表示
             pTitle.add("ラムダ式:");
             pType.add(lr.type);
             // TODO:!!
             pUrl.add(lr.type);
             // TODO:!!
-            if(!lr.argType.isEmpty()){
+            if (!lr.argType.isEmpty()) {
                 pArgType.add(lr.argType.get(0));
             } else {
                 pArgType.add("");
@@ -63,17 +67,19 @@ public class SourceRecordStorage {
         });
     }
 
-    void parseMethodRecord(){
+    void parseMethodRecord() {
         // TODO:aho no blocker
-        if( methodRecords == null ){ return;}
-        methodRecords.forEach(mr-> {
+        if (methodRecords == null) {
+            return;
+        }
+        methodRecords.forEach(mr -> {
             // TODO:数字を表示
             pTitle.add("メソッド:" + mr.apiName);
             pType.add(mr.className);
             // TODO:!!
             pUrl.add(mr.className);
             // TODO:!!
-            if(!mr.argumentTypeName.isEmpty()) {
+            if (!mr.argumentTypeName.isEmpty()) {
                 pArgType.add(mr.argumentTypeName.get(0));
             } else {
                 pArgType.add("");
@@ -82,31 +88,73 @@ public class SourceRecordStorage {
             pImgUrl.add("./img/i1.png");
         });
     }
-    void reCalculateColorCounter(){ // メソッド・ラムダの色分け用のカウンターを計算する
+
+    void reCalculateColorCounter() { // メソッド・ラムダの色分け用のカウンターを計算する
 
     }
 
-    void describe(){
+    void describe() {
         System.out.println("methodRecords:");
-        methodRecords.forEach( mr -> System.out.println("methodRecord:"+mr.methodName));
+        methodRecords.forEach(mr -> System.out.println("methodRecord:" + mr.methodName));
         System.out.println("lambdaRecords:");
-        lambdaRecords.forEach( lr -> System.out.println("methodRecord:"+lr.type));
+        lambdaRecords.forEach(lr -> System.out.println("methodRecord:" + lr.type));
     }
     // void parseMergedRecords(){}
 
 
-    public List getPTitle(){ return pTitle; }
-    public void setPTitle(List p){ this.pTitle = new ArrayList(p);}
-    public List getPType(){ return pType; }
-    public void setPType(List p){ this.pType = new ArrayList(p);}
-    public List getPUrl(){ return pUrl; }
-    public void setPUrl(List p){ this.pUrl = new ArrayList(p);}
-    public List getPArgType(){ return pArgType; }
-    public void setPArgType(List p){ this.pArgType = new ArrayList(p);}
-    public List getPRetType(){ return pRetType; }
-    public void setPRetType(List p){ this.pRetType = new ArrayList(p);}
-    public List getPImgUrl(){ return pImgUrl; }
-    public void setPImgType(List p){ this.pImgUrl = new ArrayList(p);}
-    public List<Integer> getColorCounter() { return colorCounter; }
-    public void setColorCounter(List<Integer> colorCounter) { this.colorCounter = colorCounter; }
+    public List getPTitle() {
+        return pTitle;
+    }
+
+    public void setPTitle(List p) {
+        this.pTitle = new ArrayList(p);
+    }
+
+    public List getPType() {
+        return pType;
+    }
+
+    public void setPType(List p) {
+        this.pType = new ArrayList(p);
+    }
+
+    public List getPUrl() {
+        return pUrl;
+    }
+
+    public void setPUrl(List p) {
+        this.pUrl = new ArrayList(p);
+    }
+
+    public List getPArgType() {
+        return pArgType;
+    }
+
+    public void setPArgType(List p) {
+        this.pArgType = new ArrayList(p);
+    }
+
+    public List getPRetType() {
+        return pRetType;
+    }
+
+    public void setPRetType(List p) {
+        this.pRetType = new ArrayList(p);
+    }
+
+    public List getPImgUrl() {
+        return pImgUrl;
+    }
+
+    public void setPImgType(List p) {
+        this.pImgUrl = new ArrayList(p);
+    }
+
+    public List<Integer> getColorCounter() {
+        return colorCounter;
+    }
+
+    public void setColorCounter(List<Integer> colorCounter) {
+        this.colorCounter = colorCounter;
+    }
 }
