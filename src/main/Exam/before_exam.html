@@ -47,7 +47,6 @@
      */
 
 
-
     let ExNum, time, time_limit
     let ans = []
     let go = false
@@ -60,30 +59,30 @@
         timer_element.textContent = "ここに時間が表示されます:ここに制限時間が表示されます"
         ex_sentence.textContent = "ここに問題が表示されます"
         alert("ready?")
-        time=0
+        time = 0
         go = true
     }
 
-    let time_count = function(){
-        if(!go){
+    let time_count = function () {
+        if (!go) {
             return
         }
-        if (ExNum === ExA_sentence.length + 1){
-            alert(ExNum)
-        }
         time += 1;
-        if(time >= time_limit){
+        if (time >= time_limit) {
             time = 0;
-            ExNum++
+            if (++ExNum === ExA_sentence.length + 1) {
+                alert(ExNum)
+                go = false;
+            }
             timer_element.textContent = time
-            ex_sentence.textContent = "問" + ExNum + ":" + ExA_sentence[ExNum-1]
+            ex_sentence.textContent = "問" + ExNum + ":" + ExA_sentence[ExNum - 1]
             ex_img.src = "./img/ExA" + (ExNum) + ".PNG"
-            time_limit = ExA_time_limit[ExNum-1]
+            time_limit = ExA_time_limit[ExNum - 1]
             const ans_element = document.getElementById("ans-element")
             ans.push(ans_element.answer.value)
             console.log(ans)
         }
-        timer_element.textContent = "残り時間:" + (time_limit-time);
+        timer_element.textContent = "残り時間:" + (time_limit - time);
     }
     setInterval(time_count, 1000)
 </script>
