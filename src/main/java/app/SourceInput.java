@@ -164,7 +164,19 @@ class CodeChar {
     }
 
     void test() {
-        List<Integer> list = Arrays.asList(1, 2, 3, 4);
-        list.forEach(i -> System.out.print(i * 2));
+
+
+
+        List<String> list = new ArrayList<>();
+        list.add("a");
+        list.add("b");
+        list.remove("a");
+        System.out.println(list.get(0));
+        
+        
+
+
+
+
     }
 }
