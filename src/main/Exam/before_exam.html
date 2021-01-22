@@ -15,36 +15,23 @@
 </div>
 <div id="ans-container">
     <form id="ans-element">
-        <input type="radio" id="ans1" name="answer" value="1" checked><label for="ans1">回答1</label>
-        <input type="radio" id="ans2" name="answer" value="2"><label for="ans2">回答2</label>
-        <input type="radio" id="ans3" name="answer" value="3"><label for="ans3">回答3</label>
-        <input type="radio" id="ans4" name="answer" value="4"><label for="ans4">回答4</label>
+        <input type="radio" id="ans1" name="answer" value="1" checked><label for="ans1" id="l1">回答1</label>
+        <input type="radio" id="ans2" name="answer" value="2"><label for="ans2" id="l2">回答2</label>
+        <input type="radio" id="ans3" name="answer" value="3"><label for="ans3" id="l3">回答3</label>
+        <input type="radio" id="ans4" name="answer" value="4"><label for="ans4" id="l4">回答4</label>
     </form>
 </div>
 
 <script>
     // TODO:結構、実装やばい
-    let ExA_sentence = ['標準出力を求めよ。', '標準出力を求めよ', '標準出力を求めよ', '標準出力を求めよ', '標準出力を求めよ', '標準出力を求めよ', '標準出力を求めよ', '標準出力を求めよ', '標準出力を求めよ', '標準出力を求めよ']
-    let ExA_time_limit = [6, 6, 6, 60, 60, 60, 60, 60, 60, 60]
-    /*
-    let ExB_sentence = ['次のFunctionalインターフェースの内、必ずbooleanを返すものはどれ',
-        '次のFunctionalインターフェースの内、結果を返さないものはどれ',
-        '次の内、ラムダ式の記述として正しいものはどれ',
-        '次の内、ラムダ式の記述として正しいものはどれ。ただしListクラスのforEachメソッドはConsumer&lt;T&gt;を引数に取る。',
-        '次の内、ラムダ式の記述として誤っているものをすべて選べ',
-        '次の内、関数型インターフェースとラムダ式の記述として正しいものはどれ',
-        '以下の要件を満たすように空欄に適切なラムダ式を記述しなさい。\n・list変数の各要素を２倍し、出力する。\n・ListクラスのforEachメソッドはConsumer&lt;T&gt;を引数に取るものとする',
-        '次の内、StreamAPIの説明として正しいものはどれ',
-        '下のコードの標準出力の結果を求めなさい',
-        '下のコードの標準出力の結果を求めなさい',
-        'ソースコードを編集して、条件を満たすソースコードを完成させなさい\nX行目のListクラスのlist変数に以下の処理を行う。ただし、それぞれの処理にはStreamAPIとラムダ式を使用し、一つの文でなければならない。\n' +
-        '・各要素を２倍する\n' +
-        '・３の倍数の要素を削除する\n' +
-        '・各要素を一つずつ標準出力（System.out.println()）する\n',
-        '下に示す関数を条件に沿って書き直しなさい\n・For文及びif文を使わず、StreamAPIとラムダ式を使用すること\n・出力が一致すること\n'
-        ]
-    let ExB_time_limit = [120, 120, 120, 120, 120, 120, 180, 120, 180, 300, 300, 600]
-     */
+    const ExA_sentence = ['標準出力を求めよ。', '標準出力を求めよ', '標準出力を求めよ', '標準出力を求めよ', '標準出力を求めよ', '標準出力を求めよ', '標準出力を求めよ', '標準出力を求めよ', '標準出力を求めよ', '標準出力を求めよ']
+    let ExA_time_limit = [60, 60, 60, 60, 60, 60, 60, 60, 60, 60]
+    const ExA_ans1_str = ["1",    "0", "0",    "null", "1", "1",    "0123", "1", "0", "!a"]
+    const ExA_ans2_str = ["2",    "2", "1",    "a",    "2", "4",    "1234", "2", "1", "b"]
+    const ExA_ans3_str = ["11",   "i", "2",    "b",    "3", "123",  "4321", "3", "2", "!c"]
+    const ExA_ans4_str = ["null", "j", "null", "0",    "4", "1234", "3210", "4", "3", "d"]
+    let ExA_time_limit_test = [2, 2, 2,2 ,2,2,2,2,2,2]
+    ExA_time_limit = ExA_time_limit_test
 
 
     let ExNum, time, time_limit
@@ -53,10 +40,14 @@
     const timer_element = document.getElementById("timer")
     const ex_sentence = document.getElementById("ex-sentence")
     const ex_img = document.getElementById("ex-img")
+    const ans1 = document.getElementById("l1")
+    const ans2 = document.getElementById("l2")
+    const ans3 = document.getElementById("l3")
+    const ans4 = document.getElementById("l4")
     window.onload = function () {
         ExNum = 0
         time_limit = 1;
-        timer_element.textContent = "ここに時間が表示されます:ここに制限時間が表示されます"
+        timer_element.textContent = "ここに制限時間が表示されます"
         ex_sentence.textContent = "ここに問題が表示されます"
         alert("ready?")
         time = 0
@@ -71,16 +62,28 @@
         if (time >= time_limit) {
             time = 0;
             if (++ExNum === ExA_sentence.length + 1) {
-                alert(ExNum)
+                alert("お疲れさまでした。結果を保存し、提出してください。")
                 go = false;
+                let blob = new Blob(ans, { "type" : "text/plain"})
+                const a = document.createElement('a')
+                a.href = URL.createObjectURL(blob)
+                a.download = 'result.txt'
+                a.style.display = 'none'
+                document.body.appendChild(a)
+                a.click()
+                document.body.removeChild(a)
+                ans = []
             }
             timer_element.textContent = time
             ex_sentence.textContent = "問" + ExNum + ":" + ExA_sentence[ExNum - 1]
             ex_img.src = "./img/ExA" + (ExNum) + ".PNG"
             time_limit = ExA_time_limit[ExNum - 1]
+            ans1.textContent = ExA_ans1_str[ExNum-1]
+            ans2.textContent = ExA_ans2_str[ExNum-1]
+            ans3.textContent = ExA_ans3_str[ExNum-1]
+            ans4.textContent = ExA_ans4_str[ExNum-1]
             const ans_element = document.getElementById("ans-element")
-            ans.push(ans_element.answer.value)
-            console.log(ans)
+            ans.push(ans_element.answer.value + ",")
         }
         timer_element.textContent = "残り時間:" + (time_limit - time);
     }

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>practice</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./style/monokai.css">
+    <link rel="stylesheet" href="./style.css">
+    <script src="./js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+<header class="header-class">
+    <div id="header-container">
+        <a href="javascript:OnLambdaLinkClick();" style="left: 20%;">ラムダ式</a>
+        <a href="javascript:OnStreamLinkClick();" style="left: 40%;">Stream API</a>
+        <span id="time-elm" style="left: 60%;">time</span>
+    </div>
+</header>
+<div id="lambda-contents" class="contents" >
+<p>テストコードはこちら</p>
+<pre><code class="code-class">console.log('lambda')
+console.log('b')
+console.log('c')</code></pre>
+<p>ここまで</p>
+</div>
+<div id="stream-contents" class="contents" style="display:none">
+<p>テストコードはこちら</p>
+<pre><code class="code-class">console.log('stream')
+console.log('b')
+console.log('c')</code></pre>
+<p>ここまで</p>
+</div>
+<script defer>
+    function OnLambdaLinkClick() {
+        document.getElementById("lambda-contents").style.display = 'block'
+        document.getElementById("stream-contents").style.display = 'none'
+    }
+    function OnStreamLinkClick() {
+        document.getElementById("stream-contents").style.display = 'block'
+        document.getElementById("lambda-contents").style.display = 'none'
+    }
+    function ClearContents() {
+    }
+    let time
+    const time_limit = 30
+    const time_elm = document.getElementById("time-elm")
+    window.onload = function () {
+        alert("ready?")
+        time = 0
+        go = true
+    }
+    let time_count = function () {
+        if (!go) { return; }
+        time++
+        time_elm.textContent = "残り時間"+(time_limit-time)
+        if ((time_limit-time) <= 0){
+            // TODO:非同期にやりたかった
+            document.getElementById("lambda-contents").style.display = 'none'
+            document.getElementById("stream-contents").style.display = 'none'
+            alert("学習を終了してください")
+            go = false
+        }
+    }
+    setInterval(time_count, 1000)
+</script>
+</body>
+</html>
