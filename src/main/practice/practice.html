@@ -16,7 +16,7 @@
         <span id="time-elm" style="left: 60%;">time</span>
     </div>
 </header>
-<div id="lambda-contents" class="contents" >
+<div id="lambda-contents" class="contents">
 <p>テストコードはこちら</p>
 <pre><code class="code-class">console.log('lambda')
 console.log('b')
@@ -30,7 +30,7 @@ console.log('b')
 console.log('c')</code></pre>
 <p>ここまで</p>
 </div>
-<script defer>
+<script>
     function OnLambdaLinkClick() {
         document.getElementById("lambda-contents").style.display = 'block'
         document.getElementById("stream-contents").style.display = 'none'
@@ -38,8 +38,6 @@ console.log('c')</code></pre>
     function OnStreamLinkClick() {
         document.getElementById("stream-contents").style.display = 'block'
         document.getElementById("lambda-contents").style.display = 'none'
-    }
-    function ClearContents() {
     }
     let time
     const time_limit = 30
@@ -54,10 +52,9 @@ console.log('c')</code></pre>
         time++
         time_elm.textContent = "残り時間"+(time_limit-time)
         if ((time_limit-time) <= 0){
-            // TODO:非同期にやりたかった
             document.getElementById("lambda-contents").style.display = 'none'
             document.getElementById("stream-contents").style.display = 'none'
-            alert("学習を終了してください")
+            document.getElementById("header-container").textContent = '学習は終了です。お疲れさまでした。'
             go = false
         }
     }
