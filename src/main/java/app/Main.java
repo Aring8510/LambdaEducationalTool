@@ -97,17 +97,16 @@ public class Main {
                     // MethodRecordの生成
                     if (MethodRecord.whichFunctionalAPI(rmd.getQualifiedSignature()) == MethodRecord.functionalAPI.OptionalAPI ||
                             MethodRecord.whichFunctionalAPI(rmd.getQualifiedSignature()) == MethodRecord.functionalAPI.StreamAPI) {
-                        // ResolvedMethodDeclarationのgetTypeParameters()が壊れている?ので古のFor文を使う。
-                        // mce.resolve().getTypeParameters().stream().forEach(..);
                         List<String> rmdArgType = new ArrayList<>();
                         for (int i = 0; i < rmd.getNumberOfParams(); i++) {
                             rmdArgType.add(rmd.getParam(i).describeType());
                         }
+
                         Position beginPosition = mce.getBegin().orElse(new Position(-1, -1));
                         Position endPosition = mce.getEnd().orElse(new Position(-1, -1));
                         MyPosition myPosition = new MyPosition(beginPosition.column, endPosition.column, beginPosition.line, endPosition.line);
                         MethodRecord methodRecord = new MethodRecord(rmd.getName(), myPosition,
-                                rmd.getQualifiedSignature(), rmdArgType, rmd.getReturnType().describe());
+                                rmd.getQualifiedName(), rmdArgType, rmd.getReturnType().describe());
                         sourceRecordStorage.registerMethodRecord(methodRecord);
                     }
                     // LambdaRecordの生成

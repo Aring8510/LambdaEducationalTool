@@ -21,11 +21,11 @@ public class MethodRecord implements Record, Comparable<Record> {
     }
     // TODO:変数でなく関数でよい?
 
-    MethodRecord(String _methodName, MyPosition _myPosition, String qualifiedSignature, List<String> _argumentTypeName, String _returnTypeName) {
+    MethodRecord(String _methodName, MyPosition _myPosition, String qualifiedName, List<String> _argumentTypeName, String _returnTypeName) {
         this.methodName = _methodName;
         this.myPosition = new MyPosition(_myPosition);
-        // qualifiedSignature:クラス名.メソッド名(引数のクラス型)
-        switch (MethodRecord.whichFunctionalAPI(qualifiedSignature)) {
+        // qualifiedName:クラス名.メソッド名
+        switch (MethodRecord.whichFunctionalAPI(qualifiedName)) {
             case StreamAPI:
                 this.apiName = "Stream";
                 break;
@@ -38,18 +38,10 @@ public class MethodRecord implements Record, Comparable<Record> {
             default:
                 this.apiName = "err in method record";
         }
-        String[] temp = qualifiedSignature.split("\\.");
-        StringBuilder sb = new StringBuilder();
-        for (String t : temp) {
-            if (!t.contains("(")) { // TODO:ちょっとあやしいぞ
-                sb.append(t).append(".");
-            } else {
-                break;
-            }
-        }
-        this.className = sb.toString();
-        // 最後のドットを消去
-        this.className = this.className.substring(0, this.className.length() - 1);
+
+        // classNameはqualifiedNameからメソッド名を落としたもの
+        // qualifiedNameから最後の".hogefuga"を削除したものを使う
+        this.className = qualifiedName.substring(0, qualifiedName.lastIndexOf("."));
         this.argumentTypeName = new ArrayList<>(_argumentTypeName);
         this.returnTypeName = _returnTypeName;
 
