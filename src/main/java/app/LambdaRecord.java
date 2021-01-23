@@ -3,16 +3,19 @@ package app;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.*;
 
 public class LambdaRecord implements Record, Comparable<Record> {
 
-    String Name;
+    String name;
     String type;
     List<String> argName;
     List<String> argType;
     String returnType;
     MyPosition myPosition;
     int counter;
+
+
 
     LambdaRecord(String _type, List<String> _argName, List<String> _argType, String _returnType, MyPosition _myPosition) {
         this.type = _type;
@@ -30,6 +33,8 @@ public class LambdaRecord implements Record, Comparable<Record> {
             this.returnType = findReturnType(_type);
             if (this.returnType == null) this.returnType = "UNABLE TO FIND";
         }
+        String s = IFuncToClassName(_type);
+        this.name = s.substring(0, s.lastIndexOf('<')>=0 ? s.lastIndexOf('<') : s.length());
     }
 
     public static void test_find() {
@@ -236,6 +241,7 @@ public class LambdaRecord implements Record, Comparable<Record> {
 
     @Override
     public void describe() {
+        System.out.println("Name -> " + this.name);
         System.out.println("Type -> " + this.type);
         System.out.print("Arg Name -> ");
         argName.forEach(an -> System.out.println(an + " "));

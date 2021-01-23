@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.HashSet;
 
 public class SourceRecordStorage {
     // TODO:こういう変数は次からはOptionalにしろよな^^
@@ -11,6 +12,7 @@ public class SourceRecordStorage {
     List<MethodRecord> methodRecords = new ArrayList<>();
     // List<Record> mergedRecords = new ArrayList<>();
     Map<MyPosition, List<Record>> positionMap = new HashMap<>();
+    Map<String, String> imageUrlMap = new HashMap<>();
 
     int counter = 0;
 
@@ -21,6 +23,25 @@ public class SourceRecordStorage {
     private List<String> pRetType = new ArrayList<>();
     private List<String> pImgUrl = new ArrayList<>();
     private List<Integer> colorCounter = new ArrayList<>();
+
+    SourceRecordStorage(){
+        // 用意している画像を登録
+        imageUrlMap.put("distinct", "./img/distinct.png");
+        imageUrlMap.put("filter",   "./img/filter.png");
+        imageUrlMap.put("forEach",  "./img/forEach.png");
+        imageUrlMap.put("limit",    "./img/limit.png");
+        imageUrlMap.put("map",      "./img/map.png");
+        imageUrlMap.put("Function", "./img/Function.png");
+        imageUrlMap.put("Supplier", "./img/Supplier.png");
+        imageUrlMap.put("Consumer", "./img/Consumer.png");
+        imageUrlMap.put("Predicate","./img/Predicate.png");
+        imageUrlMap.put("DoubleToIntFunction",  "./img/XXToYYFunction.png");
+        imageUrlMap.put("DoubleToLongFunction", "./img/XXToYYFunction.png");
+        imageUrlMap.put("IntToDoubleFunction",  "./img/XXToYYFunction.png");
+        imageUrlMap.put("IntToLongFunction",    "./img/XXToYYFunction.png");
+        imageUrlMap.put("LongToIntFunction",    "./img/XXToYYFunction.png");
+        imageUrlMap.put("LongToDoubleFunction", "./img/XXToYYFunction.png");
+    }
 
     boolean registerLambdaRecord(LambdaRecord lr) {
         lambdaRecords.add(lr);
@@ -51,19 +72,17 @@ public class SourceRecordStorage {
             return;
         }
         lambdaRecords.forEach(lr -> {
-            // TODO:数字を表示
-            pTitle.add("ラムダ式:");
+            pTitle.add("ラムダ式:"+lr.name);
             pType.add(lr.type);
-            // TODO:!!
             pUrl.add(lr.type);
-            // TODO:!!
             if (!lr.argType.isEmpty()) {
                 pArgType.add(lr.argType.get(0));
             } else {
                 pArgType.add("");
             }
             pRetType.add(lr.returnType);
-            pImgUrl.add("./img/i1.png");
+            String iUrl = imageUrlMap.containsKey(lr.name) ? imageUrlMap.get(lr.name) : "./img/dummy.png";
+            pImgUrl.add(iUrl);
         });
     }
 
@@ -73,19 +92,17 @@ public class SourceRecordStorage {
             return;
         }
         methodRecords.forEach(mr -> {
-            // TODO:数字を表示
             pTitle.add(mr.apiName + "メソッド:" + mr.methodName);
             pType.add(mr.className);
-            // TODO:!!
             pUrl.add(mr.className);
-            // TODO:!!
             if (!mr.argumentTypeName.isEmpty()) {
                 pArgType.add(mr.argumentTypeName.get(0));
             } else {
                 pArgType.add("");
             }
             pRetType.add(mr.returnTypeName);
-            pImgUrl.add("./img/i1.png");
+            String iUrl = imageUrlMap.containsKey(mr.methodName) ? imageUrlMap.get(mr.methodName) : "./img/dummy.png";
+            pImgUrl.add(iUrl);
         });
     }
 
@@ -100,7 +117,6 @@ public class SourceRecordStorage {
         lambdaRecords.forEach(lr -> System.out.println("methodRecord:" + lr.type));
     }
     // void parseMergedRecords(){}
-
 
     public List getPTitle() {
         return pTitle;
