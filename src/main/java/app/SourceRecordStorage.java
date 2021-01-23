@@ -74,7 +74,7 @@ public class SourceRecordStorage {
         }
         methodRecords.forEach(mr -> {
             // TODO:数字を表示
-            pTitle.add("メソッド:" + mr.apiName);
+            pTitle.add(mr.apiName + "メソッド:" + mr.methodName);
             pType.add(mr.className);
             // TODO:!!
             pUrl.add(mr.className);
