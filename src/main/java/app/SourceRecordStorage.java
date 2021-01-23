@@ -113,6 +113,9 @@ public class SourceRecordStorage {
     String generateDocumentURL(String type, String methodName, List<String> args){
         String ret;
         StringBuilder sb = new StringBuilder();
+        if(type.lastIndexOf('<') != -1){
+            type = type.substring(0, type.lastIndexOf('<'));
+        }
         sb.append("https://docs.oracle.com/javase/jp/8/docs/api/").append(type.replaceAll("\\.", "/"))
                 .append(".html");
         if(methodName == null) {
