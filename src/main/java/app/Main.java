@@ -36,7 +36,6 @@ public class Main {
 
 
     public static void main(String[] args) {
-
         SpringApplication.run(Main.class, args);
         // parse();
     }
@@ -123,7 +122,7 @@ public class Main {
                                         });
                                         MyPosition mp = new MyPosition(createMyPositionByLe(le));
                                         // TODO:やばい
-                                        LambdaRecord lr = new LambdaRecord(lambdaType, argNames, argTypes, "brabra", mp);
+                                        LambdaRecord lr = new LambdaRecord(lambdaType, argNames, argTypes, null, mp);
                                         lr.describe();
                                         sourceRecordStorage.registerLambdaRecord(lr);
                                     }
@@ -149,7 +148,7 @@ public class Main {
                         });
                         MyPosition mp = new MyPosition(createMyPositionByLe(le));
                         // TODO:やばい
-                        LambdaRecord lr = new LambdaRecord(lambdaType, argNames, argTypes, "brabra", mp);
+                        LambdaRecord lr = new LambdaRecord(lambdaType, argNames, argTypes, null, mp);
                         lr.describe();
                         sourceRecordStorage.registerLambdaRecord(lr);
                     }));
