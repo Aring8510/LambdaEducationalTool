@@ -15,7 +15,7 @@
         <p th:text="'引数の型:'+${srs.getPArgType().get(__${status.count}__ -1)}"></p>
         <p th:text="'戻り値の型:'+${srs.getPRetType().get(__${status.count}__ -1)}"></p>
         <p><img th:src="${srs.getPImgUrl().get(__${status.count}__ -1)}"></p>
-        <p th:text="${srs.getPUrl().get(__${status.count}__ -1)}"></p>
+        <a th:href="${srs.getPUrl().get(__${status.count}__ -1)}" target="_blank">Oracle API Document</a>
     </div>
 </div>
 <a href="/sourceInput" class="submit-button">Submit another source</a>

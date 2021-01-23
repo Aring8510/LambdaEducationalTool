@@ -13,13 +13,14 @@ public class SourceRecordStorage {
     // List<Record> mergedRecords = new ArrayList<>();
     Map<MyPosition, List<Record>> positionMap = new HashMap<>();
     Map<String, String> imageUrlMap = new HashMap<>();
+    Map<String, String> documentUrlMap = new HashMap<>();
 
     int counter = 0;
 
     private List<String> pTitle = new ArrayList<>();
     private List<String> pType = new ArrayList<>();
     private List<String> pUrl = new ArrayList<>();
-    private List<String> pArgType = new ArrayList<>();
+    private ArrayList pArgType = new ArrayList<>();
     private List<String> pRetType = new ArrayList<>();
     private List<String> pImgUrl = new ArrayList<>();
     private List<Integer> colorCounter = new ArrayList<>();
@@ -74,14 +75,14 @@ public class SourceRecordStorage {
         lambdaRecords.forEach(lr -> {
             pTitle.add("ラムダ式:"+lr.name);
             pType.add(lr.type);
-            pUrl.add(lr.type);
+            pUrl.add(generateDocumentURL(lr.type, null, null));
             if (!lr.argType.isEmpty()) {
                 pArgType.add(lr.argType.get(0));
             } else {
                 pArgType.add("");
             }
             pRetType.add(lr.returnType);
-            String iUrl = imageUrlMap.containsKey(lr.name) ? imageUrlMap.get(lr.name) : "./img/dummy.png";
+            String iUrl = imageUrlMap.getOrDefault(lr.name, "./img/dummy.png");
             pImgUrl.add(iUrl);
         });
     }
@@ -94,20 +95,41 @@ public class SourceRecordStorage {
         methodRecords.forEach(mr -> {
             pTitle.add(mr.apiName + "メソッド:" + mr.methodName);
             pType.add(mr.className);
-            pUrl.add(mr.className);
+            pUrl.add(generateDocumentURL(mr.className, mr.methodName, mr.argumentTypeName));
             if (!mr.argumentTypeName.isEmpty()) {
                 pArgType.add(mr.argumentTypeName.get(0));
             } else {
                 pArgType.add("");
             }
             pRetType.add(mr.returnTypeName);
-            String iUrl = imageUrlMap.containsKey(mr.methodName) ? imageUrlMap.get(mr.methodName) : "./img/dummy.png";
+            String iUrl = imageUrlMap.getOrDefault(mr.methodName, "./img/dummy.png");
             pImgUrl.add(iUrl);
         });
     }
 
     void reCalculateColorCounter() { // メソッド・ラムダの色分け用のカウンターを計算する
 
+    }
+    String generateDocumentURL(String type, String methodName, List<String> args){
+        String ret;
+        StringBuilder sb = new StringBuilder();
+        sb.append("https://docs.oracle.com/javase/jp/8/docs/api/").append(type.replaceAll("\\.", "/"))
+                .append(".html");
+        if(methodName == null) {
+            return new String(sb);
+        }
+        sb.append("#").append(methodName);
+        if (args.isEmpty()){
+            sb.append("--");
+            return new String(sb);
+        }
+        args.forEach(s->{
+            if(s.lastIndexOf('<') != -1){
+                s = s.substring(0, s.lastIndexOf('<'));
+            }
+            sb.append("-").append(s).append("-");
+        });
+        return new String(sb);
     }
 
     void describe() {
