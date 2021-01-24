@@ -34,6 +34,7 @@ public class SourceRecordStorage {
         imageUrlMap.put("limit",    "./img/limit.png");
         imageUrlMap.put("map",      "./img/map.png");
         imageUrlMap.put("flatMap",      "./img/flatMap.png");
+        imageUrlMap.put("collect",      "./img/collect.png");
         imageUrlMap.put("Function", "./img/Function.png");
         imageUrlMap.put("Supplier", "./img/Supplier.png");
         imageUrlMap.put("Consumer", "./img/Consumer.png");

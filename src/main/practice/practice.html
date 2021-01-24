@@ -11,25 +11,173 @@
 <body>
 <header class="header-class">
     <div id="header-container">
-        <a href="javascript:OnLambdaLinkClick();" style="left: 20%;">ラムダ式</a>
-        <a href="javascript:OnStreamLinkClick();" style="left: 40%;">Stream API</a>
+        <a href="javascript:OnLambdaLinkClick();" style="left: 20%;">ラムダ式(900秒が目安)</a>
+        <a href="javascript:OnStreamLinkClick();" style="left: 40%;">Stream API(900秒が目安)</a>
         <span id="time-elm" style="left: 60%;">time</span>
     </div>
 </header>
 <div id="lambda-contents" class="contents">
-<p>テストコードはこちら</p>
-<pre><code class="code-class">console.log('lambda')
-console.log('b')
-console.log('c')</code></pre>
-<p>ここまで</p>
+    <h1>1. ラムダ式</h1>
+    <p>ラムダ式とはJava8で追加された関数型の言語機能です。これは、Java7以前で使われていた匿名クラスの構文を簡潔に記述するためのもので、
+匿名クラスでの記述は簡単な処理を表現するためにもコード行が多くなりすぎる問題がありました。</p>
+    <pre><code class="code-class">// ソース1
+import java.util.function.*;
+public class Test {
+    public static void main(String... args) {
+        Consumer&lt;Object&gt; c = new Consumer&lt;Object&gt;() {
+            @Override
+            public void accept(Object o) {
+                System.out.println(o);
+            }
+        };
+        c.accept("hello");
+    }
+}
+</code></pre>
+    <p>上のソース1では、Consumerインターフェースのacceptメソッドを実装する匿名クラスを生成しています。これによって変数rにはある標準出力をする
+        処理の中身を記述することができました。</p>
+    <pre><code class="code-class">// ソース2
+import java.util.function.*;
+public class Test {
+    public static void main(String... args) {
+        Consumer&lt;Object&gt; c2 = (Object o) -> System.out.println(o.toString());
+        c2.accept("hello");
+  }
+}</code></pre>
+    <p>上のソース2ではソース1と同じ処理をラムダ式を使って記述しています。これによってより簡潔に、処理自体を変数に格納することができました。<br>
+    ラムダ式が4行目の=演算子の右辺で使われています。
+    </p>
+    <h1>2. ラムダ式の記法</h1>
+    <p>ラムダ式の記法は3つに分けられます。->の前のパラメータ指定部、->のアロー演算子部、->のあとのボディ部です。</p>
+    <img src="lambda.png"><br>
+    <h2>2.1 パラメータ指定部</h2>
+    <p>パラメータ指定部では、ラムダ式の型が引数を取る場合、引数を記述します。</p>
+    <p>ラムダ式の記述は省略可能な部分があります。</p>
+    <pre><code>//　ソース3
+import java.util.function.*;
+public class Test {
+    public static void main(String... args) {
+    	Consumer&lt;Integer&gt; c1 = (Integer i) -&gt; System.out.println(i);
+        Consumer&lt;Integer&gt; c2 = (i) -&gt; System.out.println(i);
+    	Consumer&lt;Integer&gt; c3 = i -&gt; System.out.println(i);
+    	// Consumer&lt;Integer&gt; c4 = (int i) -&gt; System.out.println(i); // コンパイルエラー
+    	// Consumer&lt;Integer&gt; c4 = Integer i -&gt; System.out.println(i); // コンパイルエラー
+  }
+}</code></pre>
+    <p>上のソース3のパラメータ指定部では、引数が一つの場合、変数c2のように型を省略できます。<br>
+    また、その場合、変数c3のように括弧を省略できます。<br>
+    型の指定にはプリミティブ型は指定できません。
+    </p>
+    <h2>2.2 アロー演算子部</h2>
+    <p>アロー演算子部には->を必ず記述してください</p>
+    <h2>2.3 ボディ部</h2>
+    <p>ボディ部には、処理の内容を記述します。</p>
+    <pre><code>//　ソース4
+import java.util.function.*;
+public class Test {
+    public static void main(String... args) {
+    	Function&lt;Integer, Integer&gt; c1 = i -&gt; { return i*2;};
+    	Function&lt;Integer, Integer&gt; c2 = i -&gt; i*2;
+    	// Function&lt;Integer, Integer&gt; c3 = i -&gt; { i*2 }; // コンパイルエラー
+    	// Function&lt;Integer, Integer&gt; c1 = i -&gt; return i*2; // コンパイルエラー
+  }
+}</code></pre>
+    <p>上のソース4のボディ部では、変数c2のように波括弧とreturn文を同時に省略することができます<br>
+    戻り値があるときはどちらか片方のみ記述することは許されていません。
+    </p>
+    <h1>3. 関数型インターフェース</h1>
+    <p>ラムダ式には型があり、今回の実験では、4つの関数型インターフェースを取り扱います。</p>
+    <p>関数型インターフェースとは、ラムダ式が記述可能なインターフェースのことです。
+        <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/function/package-summary.html" target="_blank">java.util.function</a>
+        などJavaで標準で提供されるものもありますが、ユーザーが作成することも可能です。</p>
+    <p>今回の実験では、Consumerインターフェース、Functionインターフェース、Predicateインターフェース、Supplierインターフェースを学習します。<br>
+        どのインターフェースがどのような作用をするのかは事後テストで出てくるのでOracleのAPIドキュメントで学習してください
+        <!--どのインターフェースがどのような作用をするのかは事後テストで出てくるのでOracleのAPIドキュメント及び学習ツールで学習してください -->
+    </p>
+    <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/function/Consumer.html" target="_blank">Consumerインターフェース</a><br>
+    <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/function/Function.html" target="_blank">Functionインターフェース</a><br>
+    <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/function/Predicate.html" target="_blank">Predicateインターフェース</a><br>
+    <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/function/Supplier.html" target="_blank">Supplierインターフェース</a><br>
+    <p>以下それぞれのサンプルコード</p>
+    <pre><code>// ソース5
+import java.util.function.*;
+public class Test {
+    public static void main(String... args) {
+    	// Integerを受け取り標準出力に出力するConsumer
+    	Consumer&lt;Integer&gt; c = i -&gt; System.out.println(i);
+    	// Integerを受け取り2倍した値を返すFunction
+    	Function&lt;Integer, Integer&gt; f = i -&gt; { return i*2;};
+    	// Integerを受け取り2の倍数かどうかを判別し、boolean値を返すPredicate
+    	Predicate&lt;Integer&gt; p = i -&gt; i%2 == 0;
+    	// Doubleの円周率を返すSupplier
+    	Supplier&lt;Double&gt; s = () -&gt; 3.14;
+
+    	c.accept(1);
+    	System.out.println(f.apply(2));
+    	System.out.println(p.test(2));
+    	System.out.println(s.get());
+  }
+}</code></pre>
+    <p>ラムダ式の学習は以上です</p>
+
 </div>
 <div id="stream-contents" class="contents" style="display:none">
-<p>テストコードはこちら</p>
-<pre><code class="code-class">console.log('stream')
-console.log('b')
-console.log('c')</code></pre>
-<p>ここまで</p>
+    <h1>Stream API</h1>
+    <p>Stream APIとは配列やListなどのデータ集合を扱うためのAPIで、Java8で導入されました。<br>
+        Stream APIを用いることでFor文などで行っていた複雑なデータ処理をわかりやすいコードで記述することができます。<br>
+        本学習教材では、Stream APIの学習にラムダ式を使用します。したがって、Stream APIの学習の前に必ずラムダ式の学習を終わらせてください。
+    </p>
+    <p>Stream APIの操作は、1回の「生成」、0回以上の「中間処理」、1回の「終端処理」の3つに分かれます。</p>
+    <h1>生成</h1>
+    <p>Streamはプリミティブ型や配列、リストなどから生成できます。ここでは、Listからの生成を紹介します</p>
+    <pre><code>List&lt;Integer&gt; list = Arrays.asList(1, 2, 3, 4, 5);
+Stream&lt;Integer&gt; stream = list.stream();</code></pre>
+    <h1>中間処理と終端処理</h1>
+    <p>Streamでは、様々な中間処理と終端処理を行うことができます。<br>
+        それぞれのメソッドについては、OracleのAPI Documentを参照して学習してください<br>
+        本実験では、主に以下のメソッドの中間・終端処理を取り扱います
+    </p>
+    <p>
+    <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/Stream.html#count--" target="_blank">countメソッド</a><br>
+    <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/Stream.html#distinct--" target="_blank">distinctメソッド</a><br>
+    <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/Stream.html#filter-java.util.function.Predicate-" target="_blank">filterメソッド</a><br>
+    <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/Stream.html#flatMap-java.util.function.Function-" target="_blank">flatMapメソッド</a><br>
+    <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/Stream.html#forEach-java.util.function.Consumer-" target="_blank">forEachメソッド</a><br>
+    <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/Stream.html#limit-long-" target="_blank">limitメソッド</a><br>
+    <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/Stream.html#map-java.util.function.Function-" target="_blank">mapメソッド</a><br>
+    <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/Stream.html" target="_blank">(Streamクラス)</a><br>
+    以下サンプルコード
+    </p>
+
+    <br>
+    <pre><code>import java.util.*;
+
+public class Test {
+    public static void main(String... args) {
+        List&lt;Integer&gt; list = Arrays.asList(1, 2, 3, 3);
+        // 各要素を2倍し標準出力する
+        list.stream().map(i -&gt; i * 2).forEach(i-&gt; System.out.println(i));
+        // 各要素の1のみを標準出力する
+        System.out.println(list.stream().filter(i -&gt; i == 1).count());
+
+        list.stream().distinct().forEach(i-&gt; System.out.println(i));
+        list.stream().limit(2).forEach(i-&gt; System.out.println(i));
+    }
+}</code></pre>
+    <pre><code>import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public class Test {
+    public static void main(String... args) {
+        List&lt;String&gt; nameList = Arrays.asList(&quot;Tanaka&quot;, &quot;Suzuki&quot;, &quot;Takahashi&quot;);
+        Stream&lt;Object&gt; stream = nameList.stream().flatMap(x -&gt; Stream.of(x, x.length()));
+        System.out.println((stream.collect(Collectors.toList())));    }
+}
+</code></pre>
+    <p>Stream APIの学習は以上です</p>
 </div>
+
 <script>
     function OnLambdaLinkClick() {
         document.getElementById("lambda-contents").style.display = 'block'
@@ -40,7 +188,7 @@ console.log('c')</code></pre>
         document.getElementById("lambda-contents").style.display = 'none'
     }
     let time
-    const time_limit = 30
+    const time_limit = 1800
     const time_elm = document.getElementById("time-elm")
     window.onload = function () {
         alert("ready?")
@@ -50,7 +198,7 @@ console.log('c')</code></pre>
     let time_count = function () {
         if (!go) { return; }
         time++
-        time_elm.textContent = "残り時間"+(time_limit-time)
+        time_elm.textContent = "残り秒数"+(time_limit-time)
         if ((time_limit-time) <= 0){
             document.getElementById("lambda-contents").style.display = 'none'
             document.getElementById("stream-contents").style.display = 'none'

@@ -44,6 +44,7 @@
     const ans2 = document.getElementById("l2")
     const ans3 = document.getElementById("l3")
     const ans4 = document.getElementById("l4")
+    const ans_element = document.getElementById("ans-element")
     window.onload = function () {
         ExNum = 0
         time_limit = 1;
@@ -62,6 +63,7 @@
         if (time >= time_limit) {
             time = 0;
             if (++ExNum === ExA_sentence.length + 1) {
+                ans.push(ans_element.answer.value + ",")
                 alert("お疲れさまでした。結果を保存し、提出してください。")
                 go = false;
                 let blob = new Blob(ans, { "type" : "text/plain"})
@@ -82,8 +84,8 @@
             ans2.textContent = ExA_ans2_str[ExNum-1]
             ans3.textContent = ExA_ans3_str[ExNum-1]
             ans4.textContent = ExA_ans4_str[ExNum-1]
-            const ans_element = document.getElementById("ans-element")
             ans.push(ans_element.answer.value + ",")
+            console.log(ans)
         }
         timer_element.textContent = "残り時間:" + (time_limit - time);
     }

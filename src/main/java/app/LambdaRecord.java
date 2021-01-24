@@ -36,7 +36,7 @@ public class LambdaRecord implements Record, Comparable<Record> {
             if (this.returnType == null) this.returnType = "";
         }
         String s = IFuncToClassName(_type);
-        this.name = s.substring(0, s.lastIndexOf('<')>=0 ? s.lastIndexOf('<') : s.length());
+        this.name = s.substring(0, s.lastIndexOf('<')>=0 ? s.indexOf('<') : s.length());
     }
 
     public static void test_find() {

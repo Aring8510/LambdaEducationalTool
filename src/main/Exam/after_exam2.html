@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+    <meta charset="UTF-8">
+    <title>事前テスト1</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/vs.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js"></script>
+</head>
+<body>
+<h1 id="ex-title">事後テスト2</h1>
+<div id="timer">ここに残り時間が表示されます</div>
+<div id="ex-container">
+    <pre id="ex-sentence">ここに問題文が表示されます</pre>
+    <div id="ex-img-container"><img src="./img/dummy.png" id="ex-img"></div>
+</div>
+<div id="ans-container1">
+    <form id="ans-element0">
+        <textarea id="area0" name="area" cols="50" rows="35">
+</textarea>
+    </form>
+    <form id="ans-element1">
+        <textarea id="area1" name="area" cols="50" rows="35">
+List&lt;Integer&gt; list = Arrays.asList(1,2,3,4);
+List.forEach(/*ここにプログラムを記述*/);
+        </textarea>
+    </form>
+    <form id="ans-element2" style="display: none">
+        <textarea id="area2" name="area" cols="50" rows="35">
+import java.util.*;
+class Main{
+	public static void main(String args[]){
+		List&lt;Integer&gt; list = Arrays.asList(1,2,3,4);
+		/* ここにプログラムを記述 */
+	}
+}
+        </textarea>
+    </form>
+    <form id="ans-element3" style="display: none">
+        <textarea id="area3" name="area" cols="50" rows="35">
+</textarea>
+    </form>
+    <form id="ans-element4" style="display: none">
+        <textarea id="area4" name="area" cols="50" rows="35">
+// ソースコード
+import java.util.*;
+class Main{
+	public static void main(String args[]){
+		List&lt;Integer&gt; list = Arrays.asList(1,2,3,4);
+		/* ここにプログラムを記述 */
+	}
+}
+        </textarea>
+    </form>
+    <form id="ans-element5" style="display: none">
+        <textarea id="area5" name="area" cols="50" rows="35">
+// 元のソースコード
+void test(int x, List&lt;Integer&gt; list){
+    int y = 0;
+    while (y < list.size()){
+        if(list.get(y) == x){
+            list.remove(y);
+        }else{
+            System.out.println(list.get(y));
+            y++;
+        }
+    }
+}
+        </textarea>
+    </form>
+</div>
+
+<script>
+    // TODO:結構、実装やばい
+    let ExB_sentence = ['以下の要件を満たすように空欄に適切なラムダ式を記述しなさい。(コンパイラ使用可)\n' +
+            '・list変数の各要素を2倍し、標準出力に出力する。\n' +
+        '・ListクラスのforEachメソッドはConsumerを引数にとる',
+        '下のコードの標準出力の結果を求めなさい',
+        '下のコードの標準出力の結果を求めなさい\n' +
+        '<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/lang/String.html">Stringクラスのドキュメント</a>',
+        'ソースコードを編集して、条件を満たすソースコードを完成させなさい\n'+
+        'Listクラスのlist変数に以下の処理を行う。ただし、それぞれの処理にはStreamAPIとラムダ式を使用し、一つの文でなければならない。'+
+        '・各要素を2倍する\n・3の倍数の要素を削除する\n・各要素を一つずつ標準出力する',
+        '下に示す関数を条件に沿って書き直しなさい\n' +
+        '・Stream APIとラムダ式を使うこと\n' +
+        '・For文、if文、While文、を使わないこと\n' +
+                '・出力が一致すること'
+    ]
+
+    let ExB_time_limit = [180, 180, 300, 300, 300]
+    let ExB_time_limit_test = [2,2,2,2,2,2,2,2,2,2]
+    ExB_time_limit = ExB_time_limit_test
+
+    let ExNum, time, time_limit
+    let ans = []
+    let go = false
+    const timer_element = document.getElementById("timer")
+    const ex_sentence = document.getElementById("ex-sentence")
+    const ex_img = document.getElementById("ex-img")
+    window.onload = function () {
+        ExNum = 0
+        time_limit = 1;
+        timer_element.textContent = "ここに時間が表示されます:ここに制限時間が表示されます"
+        alert("ready?")
+        time = 0
+        go = true
+    }
+
+    let time_count = function () {
+        if (!go) {
+            return
+        }
+        time += 1;
+        if (time >= time_limit) {
+            time = 0;
+            if (++ExNum === 6) {
+                ans.push(document.getElementById("area"+(ExNum-1)).value + ',\n---------------EX' + (ExNum-1) + '\n');
+                alert("お疲れさまでした")
+                let blob = new Blob(ans, { "type" : "text/plain"})
+                const a = document.createElement('a')
+                a.href = URL.createObjectURL(blob)
+                a.download = 'result.txt'
+                a.style.display = 'none'
+                document.body.appendChild(a)
+                a.click()
+                document.body.removeChild(a)
+                ans = []
+                go = false;
+            }
+            timer_element.textContent = time
+            ex_sentence.innerHTML = "問" + ExNum + ":" + ExB_sentence[ExNum - 1]
+            ex_img.src = "./img/ExC" + (ExNum) + ".PNG"
+            time_limit = ExB_time_limit[ExNum - 1]
+            document.getElementById("ans-element"+ExNum).style.display='block'
+            document.getElementById("ans-element"+(ExNum-1)).style.display='none'
+            ans.push(document.getElementById("area"+(ExNum-1)).value + '\n---------------EX' + (ExNum-1) + '\n');
+            console.log(ans)
+        }
+        timer_element.textContent = "残り時間:" + (time_limit - time);
+    }
+    setInterval(time_count, 1000)
+</script>
+</body>
+</html>
