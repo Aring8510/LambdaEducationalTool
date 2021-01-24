@@ -2,15 +2,15 @@ package app;
 
 import java.io.BufferedReader;
 import java.io.StringReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class SourceInput {
 
     private String source;
     private String highlightedSource;
+    static Map<MyPosition, Integer> colorMap = new HashMap<>();
     // ハイライトされたコード行のリスト
     private List<CodeLine> codeLines = new ArrayList<>();
 
@@ -51,6 +51,10 @@ public class SourceInput {
                 sb.append(escapeHTML(cc.ch));
             });
             sb.append("\n");
+        });
+        List<String> colorCounter = srs.getColorCounter();
+        srs.pRecords.forEach(r-> {
+            colorCounter.add(String.valueOf(colorMap.get(r.getMyPosition())));
         });
         return this.highlightedSource = new String(sb);
     }
@@ -104,6 +108,7 @@ class CodeChar {
     boolean hasAdditionalClass = false;
     boolean hasCloseTag = false;
     String className = "ch ";
+    int color = 0;
 
     // TODO:refactor me
     //  ネストやば
@@ -117,12 +122,12 @@ class CodeChar {
                 records.forEach(r -> {
                     if (r.isLambdaRecord() || r.isMethodRecord()) {
                         if (hasAdditionalClass) {
-                            // 一番最近追加したカラーカウンターを代わりに追加する
-                            srs.getColorCounter().add(srs.getColorCounter().get(srs.getColorCounter().size() - 1));
+                            SourceInput.colorMap.put(mp, color);
                         } else {
                             hasAdditionalClass = true;
                             className += "t_" + r.getCounter() + " ";
-                            srs.getColorCounter().add(r.getCounter());
+                            SourceInput.colorMap.put(mp, r.getCounter());
+                            color = r.getCounter();
                         }
                     }
                 });
@@ -172,8 +177,11 @@ class CodeChar {
         list.add("b");
         list.remove("a");
         System.out.println(list.get(0));
-        
-        
+
+
+        Predicate<Integer> p = i -> (i==1);
+
+
 
 
 

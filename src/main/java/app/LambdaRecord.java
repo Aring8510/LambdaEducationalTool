@@ -27,11 +27,13 @@ public class LambdaRecord implements Record, Comparable<Record> {
         if (_argType.isEmpty()) {
             String ret_type = findParameterType(_type);
             System.out.println(_type + " => " + ret_type);
-            this.argType.addAll(Arrays.asList(ret_type.split(",")));
+            if(ret_type != null){
+                this.argType.addAll(Arrays.asList(ret_type.split(",")));
+            }
         }
         if (_returnType == null) {
             this.returnType = findReturnType(_type);
-            if (this.returnType == null) this.returnType = "UNABLE TO FIND";
+            if (this.returnType == null) this.returnType = "";
         }
         String s = IFuncToClassName(_type);
         this.name = s.substring(0, s.lastIndexOf('<')>=0 ? s.lastIndexOf('<') : s.length());

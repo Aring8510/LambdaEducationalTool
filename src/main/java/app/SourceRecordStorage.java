@@ -23,7 +23,8 @@ public class SourceRecordStorage {
     private ArrayList pArgType = new ArrayList<>();
     private List<String> pRetType = new ArrayList<>();
     private List<String> pImgUrl = new ArrayList<>();
-    private List<Integer> colorCounter = new ArrayList<>();
+    List<Record> pRecords = new ArrayList<>();
+    private List<String> colorCounter = new ArrayList<>();
 
     SourceRecordStorage(){
         // 用意している画像を登録
@@ -84,6 +85,7 @@ public class SourceRecordStorage {
             pRetType.add(lr.returnType);
             String iUrl = imageUrlMap.getOrDefault(lr.name, "./img/dummy.png");
             pImgUrl.add(iUrl);
+            pRecords.add(lr);
         });
     }
 
@@ -104,6 +106,7 @@ public class SourceRecordStorage {
             pRetType.add(mr.returnTypeName);
             String iUrl = imageUrlMap.getOrDefault(mr.methodName, "./img/dummy.png");
             pImgUrl.add(iUrl);
+            pRecords.add(mr);
         });
     }
 
@@ -111,7 +114,6 @@ public class SourceRecordStorage {
 
     }
     String generateDocumentURL(String type, String methodName, List<String> args){
-        String ret;
         StringBuilder sb = new StringBuilder();
         if(type.lastIndexOf('<') != -1){
             type = type.substring(0, type.lastIndexOf('<'));
@@ -191,11 +193,11 @@ public class SourceRecordStorage {
         this.pImgUrl = new ArrayList(p);
     }
 
-    public List<Integer> getColorCounter() {
+    public List<String> getColorCounter() {
         return colorCounter;
     }
 
-    public void setColorCounter(List<Integer> colorCounter) {
+    public void setColorCounter(List<String> colorCounter) {
         this.colorCounter = colorCounter;
     }
 }
