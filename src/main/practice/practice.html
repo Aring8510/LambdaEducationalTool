@@ -133,6 +133,22 @@ public class Test {
     <pre><code>List&lt;Integer&gt; list = Arrays.asList(1, 2, 3, 4, 5);
 Stream&lt;Integer&gt; stream = list.stream();</code></pre>
     <h1>中間処理と終端処理</h1>
+    <p>Streamを生成したら、中間処理を行います。<br>
+    Streamの中間処理のメソッドと、終端処理のメソッドは、各要素に対して適応されます。<br>
+    例えば、各要素を2倍(map)するためには引数を一つ受け取り、返り値を返す
+        <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/function/Function.html" target="_blank">Functionインターフェース</a>
+        を引数に取る
+        <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/Stream.html#map-java.util.function.Function-" target="_blank">mapメソッド</a>
+        を使用して次のように記述できます
+    </p>
+    <pre><code>// 各要素を2倍する
+List&lt;Integer&gt; list = Arrays.asList(1, 2, 3, 3);
+list.stream().map(i -> i * 2);</code></pre>
+    <p>これによってfor文などを使用することなく、簡潔にデータを処理することができました</p>
+    <p>また、中間処理は必ずStreamを返却するので、メソッドをつなげることで中間・終端処理をつなげて記述することができます</p>
+    <pre><code>// 各要素を2倍し、標準出力する
+List&lt;Integer&gt; list = Arrays.asList(1, 2, 3, 3);
+list.stream().map(i -&gt; i * 2).forEach(i-&gt; System.out.println(i));</code></pre>
     <p>Streamでは、様々な中間処理と終端処理を行うことができます。<br>
         それぞれのメソッドについては、OracleのAPI Documentを参照して学習してください<br>
         本実験では、主に以下のメソッドの中間・終端処理を取り扱います
@@ -149,7 +165,6 @@ Stream&lt;Integer&gt; stream = list.stream();</code></pre>
     以下サンプルコード
     </p>
 
-    <br>
     <pre><code>import java.util.*;
 
 public class Test {
@@ -157,10 +172,11 @@ public class Test {
         List&lt;Integer&gt; list = Arrays.asList(1, 2, 3, 3);
         // 各要素を2倍し標準出力する
         list.stream().map(i -&gt; i * 2).forEach(i-&gt; System.out.println(i));
-        // 各要素の1のみを標準出力する
+        // 1の要素の個数を標準出力する
         System.out.println(list.stream().filter(i -&gt; i == 1).count());
-
+        // 重複を排除し、出力する
         list.stream().distinct().forEach(i-&gt; System.out.println(i));
+        // 要素の個数を制限し、出力する
         list.stream().limit(2).forEach(i-&gt; System.out.println(i));
     }
 }</code></pre>
@@ -171,7 +187,9 @@ import java.util.stream.Stream;
 public class Test {
     public static void main(String... args) {
         List&lt;String&gt; nameList = Arrays.asList(&quot;Tanaka&quot;, &quot;Suzuki&quot;, &quot;Takahashi&quot;);
+        // 各要素の文字列をさらに[文字列,文字列の長さ]のStreamに変換し、一つのStreamに合成する
         Stream&lt;Object&gt; stream = nameList.stream().flatMap(x -&gt; Stream.of(x, x.length()));
+        // output:[Tanaka, 6, Suzuki, 6, Takahashi, 9]
         System.out.println((stream.collect(Collectors.toList())));    }
 }
 </code></pre>
