@@ -42,7 +42,7 @@ public class SourceInput {
         StringBuilder sb = new StringBuilder();
         codeLines.forEach(cl -> {
             cl.codeChars.forEach(cc -> {
-                if (cc.hasCloseTag) {
+                for(int j=0;j<cc.hasCloseTag;j++){
                     sb.append("</span>");
                 }
                 if (cc.hasAdditionalClass) {
@@ -106,7 +106,7 @@ class CodeLine {
 class CodeChar {
     public char ch;
     boolean hasAdditionalClass = false;
-    boolean hasCloseTag = false;
+    int hasCloseTag = 0;
     String className = "ch ";
     int color = 0;
 
@@ -134,7 +134,7 @@ class CodeChar {
             } else if (mp.isEnd(line, column - 1)) {
                 records.forEach(r -> {
                     if (r.isLambdaRecord() || r.isMethodRecord()) {
-                        hasCloseTag = true;
+                        hasCloseTag++;
                     }
                 });
             }

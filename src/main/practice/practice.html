@@ -165,19 +165,40 @@ list.stream().map(i -&gt; i * 2).forEach(i-&gt; System.out.println(i));</code></
     以下サンプルコード
     </p>
 
-    <pre><code>import java.util.*;
+<pre><code>import java.util.*;
 
 public class Test {
     public static void main(String... args) {
         List&lt;Integer&gt; list = Arrays.asList(1, 2, 3, 3);
         // 各要素を2倍し標準出力する
         list.stream().map(i -&gt; i * 2).forEach(i-&gt; System.out.println(i));
-        // 1の要素の個数を標準出力する
-        System.out.println(list.stream().filter(i -&gt; i == 1).count());
+    }
+}</code></pre>
+<pre><code>import java.util.*;
+
+public class Test {
+    public static void main(String... args) {
+        List&lt;Integer&gt; list = Arrays.asList(1, 2, 3, 3);
         // 重複を排除し、出力する
         list.stream().distinct().forEach(i-&gt; System.out.println(i));
+    }
+}</code></pre>
+<pre><code>import java.util.*;
+
+public class Test {
+    public static void main(String... args) {
+        List&lt;Integer&gt; list = Arrays.asList(1, 2, 3, 3);
         // 要素の個数を制限し、出力する
         list.stream().limit(2).forEach(i-&gt; System.out.println(i));
+    }
+}</code></pre>
+<pre><code>import java.util.*;
+
+public class Test {
+    public static void main(String... args) {
+        List&lt;Integer&gt; list = Arrays.asList(1, 2, 3, 3);
+        // 1の要素の個数を標準出力する
+        System.out.println(list.stream().filter(i -&gt; i == 1).count());
     }
 }</code></pre>
     <pre><code>import java.util.*;
