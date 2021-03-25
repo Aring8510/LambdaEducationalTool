@@ -77,7 +77,7 @@ public class MethodRecord implements Record, Comparable<Record> {
     @Override
     public void describe() {
         System.out.println("methodName -> " + methodName);
-        System.out.println("myPosition -> (begin=" + myPosition.begin + ", end=" + myPosition.end + ", beginLine=" + myPosition.beginLine + ", endLine=" + myPosition.endLine);
+        System.out.println("myPosition -> (begin=" + myPosition.beginColumn + ", end=" + myPosition.endColumn + ", beginLine=" + myPosition.beginLine + ", endLine=" + myPosition.endLine);
         System.out.println("className -> " + className);
         System.out.print("argumentTypeName -> ");
         argumentTypeName.forEach(atn -> System.out.print(atn + " "));
@@ -90,7 +90,7 @@ public class MethodRecord implements Record, Comparable<Record> {
     // :TODO
     @Override
     public int compareTo(Record r) {
-        return 0;
+        return this.myPosition.compareTo(r.getMyPosition());
     }
 
     // 外部からも使うよ

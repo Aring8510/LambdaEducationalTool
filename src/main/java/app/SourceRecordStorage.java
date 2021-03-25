@@ -112,10 +112,6 @@ public class SourceRecordStorage {
         });
     }
 
-    void reCalculateColorCounter() { // メソッド・ラムダの色分け用のカウンターを計算する
-
-    }
-
     String generateDocumentURL(String type, String methodName, List<String> args) {
         StringBuilder sb = new StringBuilder();
         if (type.lastIndexOf('<') != -1) {

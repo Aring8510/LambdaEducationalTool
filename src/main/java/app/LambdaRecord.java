@@ -248,7 +248,7 @@ public class LambdaRecord implements Record, Comparable<Record> {
         System.out.print("Arg Type -> ");
         argType.forEach(at -> System.out.println(at + " "));
         System.out.println("Return Type -> " + returnType);
-        System.out.println("myPosition -> (begin=" + myPosition.begin + ", end=" + myPosition.end + ", beginLine=" + myPosition.beginLine + ", endLine=" + myPosition.endLine);
+        System.out.println("myPosition -> (begin=" + myPosition.beginColumn + ", end=" + myPosition.endColumn + ", beginLine=" + myPosition.beginLine + ", endLine=" + myPosition.endLine);
     }
 
     // :TODO
