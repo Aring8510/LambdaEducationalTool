@@ -15,32 +15,23 @@
 </div>
 <div id="ans-container1">
     <form id="ans-element0">
-        <textarea id="area0" name="area" cols="50" rows="35">
+        <textarea id="area0" name="area" cols="100" rows="35">
 </textarea>
     </form>
     <form id="ans-element1">
-        <textarea id="area1" name="area" cols="50" rows="35">
+        <textarea id="area1" name="area" cols="100" rows="35">
 List&lt;Integer&gt; list = Arrays.asList(1,2,3,4);
-List.forEach(/*ここにプログラムを記述*/);
+list.forEach(/*ここにプログラムを記述*/);
         </textarea>
     </form>
     <form id="ans-element2" style="display: none">
-        <textarea id="area2" name="area" cols="50" rows="35">
-import java.util.*;
-class Main{
-	public static void main(String args[]){
-		List&lt;Integer&gt; list = Arrays.asList(1,2,3,4);
-		/* ここにプログラムを記述 */
-	}
-}
-        </textarea>
+        <textarea id="area2" name="area" cols="100" rows="35"></textarea>
     </form>
     <form id="ans-element3" style="display: none">
-        <textarea id="area3" name="area" cols="50" rows="35">
-</textarea>
+        <textarea id="area3" name="area" cols="100" rows="35"></textarea>
     </form>
     <form id="ans-element4" style="display: none">
-        <textarea id="area4" name="area" cols="50" rows="35">
+        <textarea id="area4" name="area" cols="100" rows="35">
 // ソースコード
 import java.util.*;
 class Main{
@@ -52,7 +43,7 @@ class Main{
         </textarea>
     </form>
     <form id="ans-element5" style="display: none">
-        <textarea id="area5" name="area" cols="50" rows="35">
+        <textarea id="area5" name="area" cols="100" rows="35">
 // 元のソースコード
 void test(int x, List&lt;Integer&gt; list){
     int y = 0;
@@ -76,7 +67,7 @@ void test(int x, List&lt;Integer&gt; list){
         '・ListクラスのforEachメソッドはConsumerを引数にとる',
         '下のコードの標準出力の結果を求めなさい',
         '下のコードの標準出力の結果を求めなさい\n' +
-        '<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/lang/String.html">Stringクラスのドキュメント</a>',
+        '<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/lang/String.html" target="_blank">Stringクラスのドキュメント</a>',
         'ソースコードを編集して、条件を満たすソースコードを完成させなさい\n'+
         'Listクラスのlist変数に以下の処理を行う。ただし、それぞれの処理にはStreamAPIとラムダ式を使用し、一つの文でなければならない。'+
         '・各要素を2倍する\n・3の倍数の要素を削除する\n・各要素を一つずつ標準出力する',
@@ -88,7 +79,7 @@ void test(int x, List&lt;Integer&gt; list){
 
     let ExB_time_limit = [180, 180, 300, 300, 300]
     let ExB_time_limit_test = [2,2,2,2,2,2,2,2,2,2]
-    ExB_time_limit = ExB_time_limit_test
+    // ExB_time_limit = ExB_time_limit_test
 
     let ExNum, time, time_limit
     let ans = []
