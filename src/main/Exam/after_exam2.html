@@ -63,22 +63,22 @@ void test(int x, List&lt;Integer&gt; list){
 <script>
     // TODO:結構、実装やばい
     let ExB_sentence = ['以下の要件を満たすように空欄に適切なラムダ式を記述しなさい。(コンパイラ使用可)\n' +
-            '・list変数の各要素を2倍し、標準出力に出力する。\n' +
-        '・ListクラスのforEachメソッドはConsumerを引数にとる',
+    '・list変数の各要素を2倍し、標準出力に出力する。\n' +
+    '・ListクラスのforEachメソッドはConsumerを引数にとる',
         '下のコードの標準出力の結果を求めなさい',
         '下のコードの標準出力の結果を求めなさい\n' +
         '<a href="https://docs.oracle.com/javase/jp/8/docs/api/java/lang/String.html" target="_blank">Stringクラスのドキュメント</a>',
-        'ソースコードを編集して、条件を満たすソースコードを完成させなさい\n'+
-        'Listクラスのlist変数に以下の処理を行う。ただし、それぞれの処理にはStreamAPIとラムダ式を使用し、一つの文でなければならない。'+
+        'ソースコードを編集して、条件を満たすソースコードを完成させなさい\n' +
+        'Listクラスのlist変数に以下の処理を行う。ただし、それぞれの処理にはStreamAPIとラムダ式を使用し、一つの文でなければならない。' +
         '・各要素を2倍する\n・3の倍数の要素を削除する\n・各要素を一つずつ標準出力する',
         '下に示す関数を条件に沿って書き直しなさい\n' +
         '・Stream APIとラムダ式を使うこと\n' +
         '・For文、if文、While文、を使わないこと\n' +
-                '・出力が一致すること'
+        '・出力が一致すること'
     ]
 
     let ExB_time_limit = [180, 180, 300, 300, 300]
-    let ExB_time_limit_test = [2,2,2,2,2,2,2,2,2,2]
+    let ExB_time_limit_test = [2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
     // ExB_time_limit = ExB_time_limit_test
 
     let ExNum, time, time_limit
@@ -104,9 +104,9 @@ void test(int x, List&lt;Integer&gt; list){
         if (time >= time_limit) {
             time = 0;
             if (++ExNum === 6) {
-                ans.push(document.getElementById("area"+(ExNum-1)).value + ',\n---------------EX' + (ExNum-1) + '\n');
+                ans.push(document.getElementById("area" + (ExNum - 1)).value + ',\n---------------EX' + (ExNum - 1) + '\n');
                 alert("お疲れさまでした")
-                let blob = new Blob(ans, { "type" : "text/plain"})
+                let blob = new Blob(ans, {"type": "text/plain"})
                 const a = document.createElement('a')
                 a.href = URL.createObjectURL(blob)
                 a.download = 'result.txt'
@@ -121,9 +121,9 @@ void test(int x, List&lt;Integer&gt; list){
             ex_sentence.innerHTML = "問" + ExNum + ":" + ExB_sentence[ExNum - 1]
             ex_img.src = "./img/ExC" + (ExNum) + ".PNG"
             time_limit = ExB_time_limit[ExNum - 1]
-            document.getElementById("ans-element"+ExNum).style.display='block'
-            document.getElementById("ans-element"+(ExNum-1)).style.display='none'
-            ans.push(document.getElementById("area"+(ExNum-1)).value + '\n---------------EX' + (ExNum-1) + '\n');
+            document.getElementById("ans-element" + ExNum).style.display = 'block'
+            document.getElementById("ans-element" + (ExNum - 1)).style.display = 'none'
+            ans.push(document.getElementById("area" + (ExNum - 1)).value + '\n---------------EX' + (ExNum - 1) + '\n');
             console.log(ans)
         }
         timer_element.textContent = "残り時間:" + (time_limit - time);

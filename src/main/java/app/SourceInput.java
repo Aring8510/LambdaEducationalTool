@@ -2,7 +2,10 @@ package app;
 
 import java.io.BufferedReader;
 import java.io.StringReader;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -42,7 +45,7 @@ public class SourceInput {
         StringBuilder sb = new StringBuilder();
         codeLines.forEach(cl -> {
             cl.codeChars.forEach(cc -> {
-                for(int j=0;j<cc.hasCloseTag;j++){
+                for (int j = 0; j < cc.hasCloseTag; j++) {
                     sb.append("</span>");
                 }
                 if (cc.hasAdditionalClass) {
@@ -53,7 +56,7 @@ public class SourceInput {
             sb.append("\n");
         });
         List<String> colorCounter = srs.getColorCounter();
-        srs.pRecords.forEach(r-> {
+        srs.pRecords.forEach(r -> {
             colorCounter.add(String.valueOf(colorMap.get(r.getMyPosition())));
         });
         return this.highlightedSource = new String(sb);
@@ -171,7 +174,6 @@ class CodeChar {
     void test() {
 
 
-
         List<String> list = new ArrayList<>();
         list.add("a");
         list.add("b");
@@ -179,11 +181,7 @@ class CodeChar {
         System.out.println(list.get(0));
 
 
-        Predicate<Integer> p = i -> (i==1);
-
-
-
-
+        Predicate<Integer> p = i -> (i == 1);
 
 
     }

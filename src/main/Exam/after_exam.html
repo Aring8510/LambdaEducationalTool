@@ -31,20 +31,20 @@
         '次の内、ラムダ式の記述として正しいものを選べ',
         '次の内、関数型インターフェースとラムダ式の記述として正しいものはどれ',
         '次の内、StreamAPIの説明として正しいものはどれ'
-        ]
+    ]
     let ExB_time_limit = [60, 60, 60, 60, 60, 60, 60]
-    let ExB_time_limit_test = [2,2,2,2,2,2,2,2,2,2]
-    const ExA_ans1_str = ["Supplier<T>",   "Supplier<T>",   "Predicate<Integer> p = \{ i } -> { i==2; }",
+    let ExB_time_limit_test = [2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+    const ExA_ans1_str = ["Supplier<T>", "Supplier<T>", "Predicate<Integer> p = \{ i } -> { i==2; }",
         "list.forEach(i<Integer> ->System.out.print(i));",
         "Predicate<Integer> p = (Integer i) -> (i==2);",
         "Consumer<Integer> c = i -> { return i*2; };",
         "mapメソッドは引数にFunctionを取り、その式が返す値を各要素に置き換える。"]
-    const ExA_ans2_str = ["Predicate<T>",  "Predicate<T>",  "Predicate<Integer> p = \{ i } ->  i==2; ",
+    const ExA_ans2_str = ["Predicate<T>", "Predicate<T>", "Predicate<Integer> p = \{ i } ->  i==2; ",
         "list.forEach((List<Integer> i) => System.out.print(i));",
         "Predicate<Integer> p = Integer i -> (i==2);",
         "Predicate<Integer> p = i -> (i==1);",
         "mapメソッドは引数にFunctionを取り、重複した要素を削除する。"]
-    const ExA_ans3_str = ["Consumer<T>",   "Consumer<T>",   "Predicate<Integer> p = ( i ) -> i==2;\n",
+    const ExA_ans3_str = ["Consumer<T>", "Consumer<T>", "Predicate<Integer> p = ( i ) -> i==2;\n",
         "list.forEach(i => System.out.print(i));",
         "Predicate<int> p = ( i ) -> (return i==2;);",
         "Function<Integer, Integer> f = (i, j) -> System.out.println(i+j);",
@@ -86,7 +86,7 @@
             if (++ExNum === ExB_sentence.length + 1) {
                 ans.push(ans_element.answer.value)
                 alert("お疲れさまでした")
-                let blob = new Blob(ans, { "type" : "text/plain"})
+                let blob = new Blob(ans, {"type": "text/plain"})
                 const a = document.createElement('a')
                 a.href = URL.createObjectURL(blob)
                 a.download = 'result.txt'
@@ -100,10 +100,10 @@
             timer_element.textContent = time
             ex_sentence.textContent = "問" + ExNum + ":" + ExB_sentence[ExNum - 1]
             time_limit = ExB_time_limit[ExNum - 1]
-            ans1.textContent = ExA_ans1_str[ExNum-1]
-            ans2.textContent = ExA_ans2_str[ExNum-1]
-            ans3.textContent = ExA_ans3_str[ExNum-1]
-            ans4.textContent = ExA_ans4_str[ExNum-1]
+            ans1.textContent = ExA_ans1_str[ExNum - 1]
+            ans2.textContent = ExA_ans2_str[ExNum - 1]
+            ans3.textContent = ExA_ans3_str[ExNum - 1]
+            ans4.textContent = ExA_ans4_str[ExNum - 1]
             ans.push(ans_element.answer.value)
             console.log(ans)
         }

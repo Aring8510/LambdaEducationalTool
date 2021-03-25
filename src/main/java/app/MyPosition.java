@@ -2,12 +2,10 @@ package app;
 
 import java.util.Objects;
 import java.util.function.DoubleToIntFunction;
-import java.util.function.Function;
-import java.util.function.Supplier;
 
 public class MyPosition {
     int begin, end, beginLine, endLine;
-    DoubleToIntFunction f = (double d) -> (int)(d*3.14);
+    DoubleToIntFunction f = (double d) -> (int) (d * 3.14);
 
     MyPosition(int b, int e, int bl, int el) {
         begin = b;

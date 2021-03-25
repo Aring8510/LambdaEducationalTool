@@ -1,11 +1,15 @@
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.*;
+import java.util.function.DoubleToIntFunction;
+import java.util.function.Function;
+import java.util.function.IntToDoubleFunction;
+import java.util.function.LongToDoubleFunction;
 
 public class LambdaSource {
-    IntToDoubleFunction i = i->(double)i;
-    LongToDoubleFunction l = i->(double)i;
-    DoubleToIntFunction d = i->(int)i;
+    IntToDoubleFunction i = i -> (double) i;
+    LongToDoubleFunction l = i -> (double) i;
+    DoubleToIntFunction d = i -> (int) i;
+
     void lambdaMethod1(Function<Integer, String> f) {
     }
 

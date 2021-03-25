@@ -26,11 +26,11 @@
     // TODO:結構、実装やばい
     const ExA_sentence = ['標準出力を求めよ。', '標準出力を求めよ', '標準出力を求めよ', '標準出力を求めよ', '標準出力を求めよ', '標準出力を求めよ', '標準出力を求めよ', '標準出力を求めよ', '標準出力を求めよ', '標準出力を求めよ']
     let ExA_time_limit = [60, 60, 60, 60, 60, 60, 60, 60, 60, 60]
-    const ExA_ans1_str = ["1",    "0", "0",    "null", "1", "1",    "0123", "1", "0", "!a"]
-    const ExA_ans2_str = ["2",    "2", "1",    "a",    "2", "4",    "1234", "2", "1", "b"]
-    const ExA_ans3_str = ["11",   "i", "2",    "b",    "3", "123",  "4321", "3", "2", "!c"]
-    const ExA_ans4_str = ["null", "j", "null", "0",    "4", "0123", "3210", "4", "3", "d"]
-    let ExA_time_limit_test = [2, 2, 2,2 ,2,2,2,2,2,2]
+    const ExA_ans1_str = ["1", "0", "0", "null", "1", "1", "0123", "1", "0", "!a"]
+    const ExA_ans2_str = ["2", "2", "1", "a", "2", "4", "1234", "2", "1", "b"]
+    const ExA_ans3_str = ["11", "i", "2", "b", "3", "123", "4321", "3", "2", "!c"]
+    const ExA_ans4_str = ["null", "j", "null", "0", "4", "0123", "3210", "4", "3", "d"]
+    let ExA_time_limit_test = [2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
 
     let ExNum, time, time_limit
     let ans = []
@@ -64,7 +64,7 @@
                 ans.push(ans_element.answer.value + ",")
                 alert("お疲れさまでした。結果を保存し、提出してください。")
                 go = false;
-                let blob = new Blob(ans, { "type" : "text/plain"})
+                let blob = new Blob(ans, {"type": "text/plain"})
                 const a = document.createElement('a')
                 a.href = URL.createObjectURL(blob)
                 a.download = 'result.txt'
@@ -78,10 +78,10 @@
             ex_sentence.textContent = "問" + ExNum + ":" + ExA_sentence[ExNum - 1]
             ex_img.src = "./img/ExA" + (ExNum) + ".PNG"
             time_limit = ExA_time_limit[ExNum - 1]
-            ans1.textContent = ExA_ans1_str[ExNum-1]
-            ans2.textContent = ExA_ans2_str[ExNum-1]
-            ans3.textContent = ExA_ans3_str[ExNum-1]
-            ans4.textContent = ExA_ans4_str[ExNum-1]
+            ans1.textContent = ExA_ans1_str[ExNum - 1]
+            ans2.textContent = ExA_ans2_str[ExNum - 1]
+            ans3.textContent = ExA_ans3_str[ExNum - 1]
+            ans4.textContent = ExA_ans4_str[ExNum - 1]
             ans.push(ans_element.answer.value + ",")
             console.log(ans)
         }

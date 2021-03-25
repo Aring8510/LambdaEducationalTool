@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.HashSet;
 
 public class SourceRecordStorage {
     // TODO:こういう変数は次からはOptionalにしろよな^^
@@ -26,25 +25,25 @@ public class SourceRecordStorage {
     List<Record> pRecords = new ArrayList<>();
     private List<String> colorCounter = new ArrayList<>();
 
-    SourceRecordStorage(){
+    SourceRecordStorage() {
         // 用意している画像を登録
         imageUrlMap.put("distinct", "./img/distinct.png");
-        imageUrlMap.put("filter",   "./img/filter.png");
-        imageUrlMap.put("forEach",  "./img/forEach.png");
-        imageUrlMap.put("limit",    "./img/limit.png");
-        imageUrlMap.put("map",      "./img/map.png");
-        imageUrlMap.put("count",      "./img/count.png");
-        imageUrlMap.put("flatMap",      "./img/flatMap.png");
-        imageUrlMap.put("collect",      "./img/collect.png");
+        imageUrlMap.put("filter", "./img/filter.png");
+        imageUrlMap.put("forEach", "./img/forEach.png");
+        imageUrlMap.put("limit", "./img/limit.png");
+        imageUrlMap.put("map", "./img/map.png");
+        imageUrlMap.put("count", "./img/count.png");
+        imageUrlMap.put("flatMap", "./img/flatMap.png");
+        imageUrlMap.put("collect", "./img/collect.png");
         imageUrlMap.put("Function", "./img/Function.png");
         imageUrlMap.put("Supplier", "./img/Supplier.png");
         imageUrlMap.put("Consumer", "./img/Consumer.png");
-        imageUrlMap.put("Predicate","./img/Predicate.png");
-        imageUrlMap.put("DoubleToIntFunction",  "./img/XXToYYFunction.png");
+        imageUrlMap.put("Predicate", "./img/Predicate.png");
+        imageUrlMap.put("DoubleToIntFunction", "./img/XXToYYFunction.png");
         imageUrlMap.put("DoubleToLongFunction", "./img/XXToYYFunction.png");
-        imageUrlMap.put("IntToDoubleFunction",  "./img/XXToYYFunction.png");
-        imageUrlMap.put("IntToLongFunction",    "./img/XXToYYFunction.png");
-        imageUrlMap.put("LongToIntFunction",    "./img/XXToYYFunction.png");
+        imageUrlMap.put("IntToDoubleFunction", "./img/XXToYYFunction.png");
+        imageUrlMap.put("IntToLongFunction", "./img/XXToYYFunction.png");
+        imageUrlMap.put("LongToIntFunction", "./img/XXToYYFunction.png");
         imageUrlMap.put("LongToDoubleFunction", "./img/XXToYYFunction.png");
     }
 
@@ -77,7 +76,7 @@ public class SourceRecordStorage {
             return;
         }
         lambdaRecords.forEach(lr -> {
-            pTitle.add("ラムダ式:"+lr.name);
+            pTitle.add("ラムダ式:" + lr.name);
             pType.add(lr.type);
             pUrl.add(generateDocumentURL(lr.type, null, null));
             if (!lr.argType.isEmpty()) {
@@ -116,23 +115,24 @@ public class SourceRecordStorage {
     void reCalculateColorCounter() { // メソッド・ラムダの色分け用のカウンターを計算する
 
     }
-    String generateDocumentURL(String type, String methodName, List<String> args){
+
+    String generateDocumentURL(String type, String methodName, List<String> args) {
         StringBuilder sb = new StringBuilder();
-        if(type.lastIndexOf('<') != -1){
+        if (type.lastIndexOf('<') != -1) {
             type = type.substring(0, type.lastIndexOf('<'));
         }
         sb.append("https://docs.oracle.com/javase/jp/8/docs/api/").append(type.replaceAll("\\.", "/"))
                 .append(".html");
-        if(methodName == null) {
+        if (methodName == null) {
             return new String(sb);
         }
         sb.append("#").append(methodName);
-        if (args.isEmpty()){
+        if (args.isEmpty()) {
             sb.append("--");
             return new String(sb);
         }
-        args.forEach(s->{
-            if(s.lastIndexOf('<') != -1){
+        args.forEach(s -> {
+            if (s.lastIndexOf('<') != -1) {
                 s = s.substring(0, s.lastIndexOf('<'));
             }
             sb.append("-").append(s).append("-");

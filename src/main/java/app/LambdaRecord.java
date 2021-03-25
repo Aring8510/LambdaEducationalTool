@@ -3,7 +3,6 @@ package app;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.*;
 
 public class LambdaRecord implements Record, Comparable<Record> {
 
@@ -16,7 +15,6 @@ public class LambdaRecord implements Record, Comparable<Record> {
     int counter;
 
 
-
     LambdaRecord(String _type, List<String> _argName, List<String> _argType, String _returnType, MyPosition _myPosition) {
         this.type = _type;
         this.argName = new ArrayList<>(_argName);
@@ -27,7 +25,7 @@ public class LambdaRecord implements Record, Comparable<Record> {
         if (_argType.isEmpty()) {
             String ret_type = findParameterType(_type);
             System.out.println(_type + " => " + ret_type);
-            if(ret_type != null){
+            if (ret_type != null) {
                 this.argType.addAll(Arrays.asList(ret_type.split(",")));
             }
         }
@@ -36,7 +34,7 @@ public class LambdaRecord implements Record, Comparable<Record> {
             if (this.returnType == null) this.returnType = "";
         }
         String s = IFuncToClassName(_type);
-        this.name = s.substring(0, s.lastIndexOf('<')>=0 ? s.indexOf('<') : s.length());
+        this.name = s.substring(0, s.lastIndexOf('<') >= 0 ? s.indexOf('<') : s.length());
     }
 
     public static void test_find() {
@@ -85,7 +83,7 @@ public class LambdaRecord implements Record, Comparable<Record> {
                 "ToLongFunction<T>",
                 "UnaryOperator<T>"
         };
-        for (String s: test_strs) {
+        for (String s : test_strs) {
             System.out.printf("%s args:\"%s\", ret:\"%s\"\n", s, findParameterType(s), findReturnType(s));
         }
     }

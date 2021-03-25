@@ -143,7 +143,7 @@ public class Main {
                     List<String> argTypes = new ArrayList<>();
                     List<String> argNames = new ArrayList<>();
                     vd.getInitializer().ifPresent(i -> i.ifLambdaExpr(le -> {
-                        le.getParameters().forEach(p->{
+                        le.getParameters().forEach(p -> {
                             argNames.add(p.getType().toString());
                         });
                         MyPosition mp = new MyPosition(createMyPositionByLe(le));
@@ -173,12 +173,12 @@ public class Main {
                     return super.visit(coift, arg);
                 }
 
-                public MyPosition createMyPositionByLe(LambdaExpr le){
-                    int b = le.getBegin().orElse(new Position(-1,-1)).column;
-                    int e = le.getEnd().orElse(new Position(-1,-1)).column;
-                    int bl = le.getBegin().orElse(new Position(-1,-1)).line;
-                    int el = le.getEnd().orElse(new Position(-1,-1)).line;
-                    return new MyPosition(b,e,bl,el);
+                public MyPosition createMyPositionByLe(LambdaExpr le) {
+                    int b = le.getBegin().orElse(new Position(-1, -1)).column;
+                    int e = le.getEnd().orElse(new Position(-1, -1)).column;
+                    int bl = le.getBegin().orElse(new Position(-1, -1)).line;
+                    int el = le.getEnd().orElse(new Position(-1, -1)).line;
+                    return new MyPosition(b, e, bl, el);
 
                 }
             }, null);

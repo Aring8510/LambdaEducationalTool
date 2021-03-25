@@ -19,7 +19,7 @@
 <div id="lambda-contents" class="contents">
     <h1>1. ラムダ式</h1>
     <p>ラムダ式とはJava8で追加された関数型の言語機能です。これは、Java7以前で使われていた匿名クラスの構文を簡潔に記述するためのもので、
-匿名クラスでの記述は簡単な処理を表現するためにもコード行が多くなりすぎる問題がありました。</p>
+        匿名クラスでの記述は簡単な処理を表現するためにもコード行が多くなりすぎる問題がありました。</p>
     <pre><code class="code-class">// ソース1
 import java.util.function.*;
 public class Test {
@@ -45,7 +45,7 @@ public class Test {
   }
 }</code></pre>
     <p>上のソース2ではソース1と同じ処理をラムダ式を使って記述しています。これによってより簡潔に、処理自体を変数に格納することができました。<br>
-    ラムダ式が4行目の=演算子の右辺で使われています。
+        ラムダ式が4行目の=演算子の右辺で使われています。
     </p>
     <h1>2. ラムダ式の記法</h1>
     <p>ラムダ式の記法は3つに分けられます。->の前のパラメータ指定部、->のアロー演算子部、->のあとのボディ部です。</p>
@@ -65,8 +65,8 @@ public class Test {
   }
 }</code></pre>
     <p>上のソース3のパラメータ指定部では、引数が一つの場合、変数c2のように型を省略できます。<br>
-    また、その場合、変数c3のように括弧を省略できます。<br>
-    型の指定にはプリミティブ型は指定できません。
+        また、その場合、変数c3のように括弧を省略できます。<br>
+        型の指定にはプリミティブ型は指定できません。
     </p>
     <h2>2.2 アロー演算子部</h2>
     <p>アロー演算子部には->を必ず記述してください</p>
@@ -83,7 +83,7 @@ public class Test {
   }
 }</code></pre>
     <p>上のソース4のボディ部では、変数c2のように波括弧とreturn文を同時に省略することができます<br>
-    戻り値があるときはどちらか片方のみ記述することは許されていません。
+        戻り値があるときはどちらか片方のみ記述することは許されていません。
     </p>
     <h1>3. 関数型インターフェース</h1>
     <p>ラムダ式には型があり、今回の実験では、4つの関数型インターフェースを取り扱います。</p>
@@ -134,11 +134,12 @@ public class Test {
 Stream&lt;Integer&gt; stream = list.stream();</code></pre>
     <h1>中間処理と終端処理</h1>
     <p>Streamを生成したら、中間処理を行います。<br>
-    Streamの中間処理のメソッドと、終端処理のメソッドは、各要素に対して適応されます。<br>
-    例えば、各要素を2倍(map)するためには引数を一つ受け取り、返り値を返す
+        Streamの中間処理のメソッドと、終端処理のメソッドは、各要素に対して適応されます。<br>
+        例えば、各要素を2倍(map)するためには引数を一つ受け取り、返り値を返す
         <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/function/Function.html" target="_blank">Functionインターフェース</a>
         を引数に取る
-        <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/Stream.html#map-java.util.function.Function-" target="_blank">mapメソッド</a>
+        <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/Stream.html#map-java.util.function.Function-"
+           target="_blank">mapメソッド</a>
         を使用して次のように記述できます
     </p>
     <pre><code>// 各要素を2倍する
@@ -154,18 +155,23 @@ list.stream().map(i -&gt; i * 2).forEach(i-&gt; System.out.println(i));</code></
         本実験では、主に以下のメソッドの中間・終端処理を取り扱います
     </p>
     <p>
-    <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/Stream.html#count--" target="_blank">countメソッド</a><br>
-    <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/Stream.html#distinct--" target="_blank">distinctメソッド</a><br>
-    <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/Stream.html#filter-java.util.function.Predicate-" target="_blank">filterメソッド</a><br>
-    <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/Stream.html#flatMap-java.util.function.Function-" target="_blank">flatMapメソッド</a><br>
-    <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/Stream.html#forEach-java.util.function.Consumer-" target="_blank">forEachメソッド</a><br>
-    <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/Stream.html#limit-long-" target="_blank">limitメソッド</a><br>
-    <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/Stream.html#map-java.util.function.Function-" target="_blank">mapメソッド</a><br>
-    <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/Stream.html" target="_blank">(Streamクラス)</a><br>
-    以下サンプルコード
+        <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/Stream.html#count--" target="_blank">countメソッド</a><br>
+        <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/Stream.html#distinct--" target="_blank">distinctメソッド</a><br>
+        <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/Stream.html#filter-java.util.function.Predicate-"
+           target="_blank">filterメソッド</a><br>
+        <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/Stream.html#flatMap-java.util.function.Function-"
+           target="_blank">flatMapメソッド</a><br>
+        <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/Stream.html#forEach-java.util.function.Consumer-"
+           target="_blank">forEachメソッド</a><br>
+        <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/Stream.html#limit-long-" target="_blank">limitメソッド</a><br>
+        <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/Stream.html#map-java.util.function.Function-"
+           target="_blank">mapメソッド</a><br>
+        <a href="https://docs.oracle.com/javase/jp/8/docs/api/java/util/stream/Stream.html"
+           target="_blank">(Streamクラス)</a><br>
+        以下サンプルコード
     </p>
 
-<pre><code>import java.util.*;
+    <pre><code>import java.util.*;
 
 public class Test {
     public static void main(String... args) {
@@ -174,7 +180,7 @@ public class Test {
         list.stream().map(i -&gt; i * 2).forEach(i-&gt; System.out.println(i));
     }
 }</code></pre>
-<pre><code>import java.util.*;
+    <pre><code>import java.util.*;
 
 public class Test {
     public static void main(String... args) {
@@ -183,7 +189,7 @@ public class Test {
         list.stream().distinct().forEach(i-&gt; System.out.println(i));
     }
 }</code></pre>
-<pre><code>import java.util.*;
+    <pre><code>import java.util.*;
 
 public class Test {
     public static void main(String... args) {
@@ -192,7 +198,7 @@ public class Test {
         list.stream().limit(2).forEach(i-&gt; System.out.println(i));
     }
 }</code></pre>
-<pre><code>import java.util.*;
+    <pre><code>import java.util.*;
 
 public class Test {
     public static void main(String... args) {
@@ -222,10 +228,12 @@ public class Test {
         document.getElementById("lambda-contents").style.display = 'block'
         document.getElementById("stream-contents").style.display = 'none'
     }
+
     function OnStreamLinkClick() {
         document.getElementById("stream-contents").style.display = 'block'
         document.getElementById("lambda-contents").style.display = 'none'
     }
+
     let time
     const time_limit = 1800
     const time_elm = document.getElementById("time-elm")
@@ -235,10 +243,12 @@ public class Test {
         go = true
     }
     let time_count = function () {
-        if (!go) { return; }
+        if (!go) {
+            return;
+        }
         time++
-        time_elm.textContent = "残り秒数"+(time_limit-time)
-        if ((time_limit-time) <= 0){
+        time_elm.textContent = "残り秒数" + (time_limit - time)
+        if ((time_limit - time) <= 0) {
             document.getElementById("lambda-contents").style.display = 'none'
             document.getElementById("stream-contents").style.display = 'none'
             document.getElementById("header-container").textContent = '学習は終了です。お疲れさまでした。'
