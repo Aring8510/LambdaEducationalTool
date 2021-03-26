@@ -1,15 +1,14 @@
 package app;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class SourceRecordStorage {
     // TODO:こういう変数は次からはOptionalにしろよな^^
     List<LambdaRecord> lambdaRecords = new ArrayList<>();
     List<MethodRecord> methodRecords = new ArrayList<>();
-    // List<Record> mergedRecords = new ArrayList<>();
+    List<Record> mergedRecords = new ArrayList<>();
     Map<MyPosition, List<Record>> positionMap = new HashMap<>();
     Map<String, String> imageUrlMap = new HashMap<>();
     Map<String, String> documentUrlMap = new HashMap<>();
@@ -67,8 +66,15 @@ public class SourceRecordStorage {
         return true;
     }
     // TODO:sort by mp
-    // void sortRecordsByMyPosition(){
-    // }
+    void mergedRecordsByMyPosition(){
+        this.mergedRecords = Stream.concat(lambdaRecords.stream(), methodRecords.stream()).collect(Collectors.toList());
+        Comparator<Record> comparator =
+                Comparator.comparing((Record r)->r.getMyPosition().beginLine)
+                        .thenComparing((Record r)->r.getMyPosition().beginColumn)
+                        .thenComparing((Record r)->r.getMyPosition().endLine)
+                        .thenComparing((Record r)->r.getMyPosition().endColumn);
+        this.mergedRecords = this.mergedRecords.stream().sorted(comparator).collect(Collectors.toList());
+    }
 
     void parseLambdaRecord() {
         // TODO:aho no blocker

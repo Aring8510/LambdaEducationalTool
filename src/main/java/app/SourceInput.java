@@ -37,7 +37,6 @@ public class SourceInput {
         List<String> sources = new ArrayList<>();
         BufferedReader br = new BufferedReader(new StringReader(source));
         br.lines().forEach(sources::add);
-        // TODO: refactor me
         int i = 1;
         for (String s : sources) {
             codeLines.add(new CodeLine(s, i++, srs));
